@@ -17,6 +17,8 @@ permalink: /:year/:month/:day/:slug
 markdown: kramdown
 include:
   - _pages
+languages: ["lt", "en"]
+exclude_from_localizations: ["assets/images"]
 
 paginate: 5
 
@@ -32,6 +34,7 @@ plugins:
   - jekyll-twitter-plugin
   - jekyll-analytics
   - jekyll-seo-tag
+  - jekyll-multiple-languages-plugin
 
 jekyll_analytics:
   GoogleAnalytics:

@@ -1,4 +1,7 @@
-// Static comments
+---
+title: Static comments
+---
+
 (function ($) {
   var $comments = $('.js-comments');
 
@@ -6,7 +9,7 @@
     var form = this;
 
     $("#comment-form-submit").html(
-      '<svg class="icon spin"><use xlink:href="#icon-loading"></use></svg> Sending...'
+      '<svg class="icon spin"><use xlink:href="#icon-loading"></use></svg> {% translate staticman.comment_modal_sending %}'
     );
     $(form).addClass('disabled');
 
@@ -16,10 +19,10 @@
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function (data) {
-        showModal('Comment submitted', 'Thanks! Your comment is pending. It will appear when approved.');
+        showModal('{% translate staticman.comment_modal_title %}', '{% translate staticman.comment_confirmation %}');
 
         $("#comment-form-submit")
-          .html("Submit");
+          .html("{% translate staticman.comment_submit %}");
 
         $(form)[0].reset();
         $(form).removeClass('disabled');
@@ -28,7 +31,7 @@
       error: function (err) {
         console.log(err);
         var ecode = (err.responseJSON || {}).errorCode || "unknown";
-        showModal('Error', 'An error occured.<br>[' + ecode + ']');
+        showModal('{% translate staticman.comment_modal_error_title %}', '{% translate staticman.comment_modal_error_text %}:<br>[' + ecode + ']');
         $("#comment-form-submit").html("Submit")
         $(form).removeClass('disabled');
         grecaptcha.reset();

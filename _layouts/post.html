@@ -5,7 +5,7 @@ layout: default
 <div class="post">
   <div class="post-info">
     {% unless page.author_hidden %}
-    <span>Written by</span>
+    <span>{% translate global.author_tagline %}</span>
     {% if page.author %}
         {{ page.author }}
     {% else %}
@@ -15,7 +15,7 @@ layout: default
 
     {% if page.date %}
       <br>
-      <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      <time datetime="{{ page.date }}">{{ page.date | date: "%Y-%m-%d" }}</time>
     {% endif %}
   </div>
 
@@ -24,9 +24,6 @@ layout: default
 
   {{ content }}
 
-  {% if site.author.twitter and page.twitter %}
-    <p>If you liked this article please follow me on <a href="{{ 'https://twitter.com/' | append: site.author.twitter }}">Twitter</a> for similar content.</p>
-  {% endif %}
 </div>
 
 {% if page.comments %}

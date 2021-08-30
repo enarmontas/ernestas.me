@@ -1,12 +1,3 @@
----
-layout: post
-title: About Me
-permalink: /about
-author_hidden: true
-redirect_from:
-  - /apie
----
-
 My name is Ernestas.
 
 I work as Site Reliability Engineer at [Vinted](https://vinted.com) where I solve infrastructure problems with code.

@@ -10,4 +10,5 @@ group :jekyll_plugins do
   gem 'jekyll_github_sample'
   gem 'jekyll-twitter-plugin'
   gem 'jekyll-analytics'
+  gem 'jekyll-multiple-languages-plugin'
 end

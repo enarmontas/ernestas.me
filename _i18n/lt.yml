@@ -1,0 +1,29 @@
+global:
+  language: English 🇬🇧
+  author_tagline: Autorius
+  theme_credits: |
+    Sukasi ant <a href="https://jekyllrb.com/">Jekyll</a> naudojant
+    <a href="https://github.com/chesterhow/tale/">Tale</a> temą.
+
+titles:
+  about: Apie
+  posts: Įrašai
+
+staticman:
+  name_field: Vardas
+  name_placeholder: Vardas (privalomas)
+  email_field: El. paštas
+  email_placeholder: El. pašto adresas (neprivalomas)
+  comment_section: Komentarai
+  comment_add: Rašyti komentarą
+  comment_submit: Publikuoti
+  comment_placeholder: Komentaras
+  comment_link: Nuoroda į komentarą
+  comment_modal_title: Komentaras išsiųstas
+  comment_modal_close: Uždaryti
+  comment_modal_sending: Siunčiama
+  comment_modal_error_title: Klaida!
+  comment_modal_error_text: Įvyko klaida
+  comment_confirmation: Ačiū! Komentaras bus publikuotas per keletą minučių.
+  reply_cancel: atšaukti atsakymą
+  reply_to: Atrašyti
