@@ -15,16 +15,21 @@ author:
 # Settings
 permalink: /:year/:month/:day/:slug
 markdown: kramdown
-include:
-  - _pages
-languages: ["lt", "en"]
-exclude_from_localizations: ["images"]
-
 paginate: 5
 
 sass:
-  sass_dir:     _sass
-  style:        compressed
+  sass_dir: _sass
+  style: compressed
+
+include:
+  - _pages
+
+exclude:
+  - README.md
+  - LICENSE.txt
+  - Gemfile.lock
+  - Gemfile
+  - vendor
 
 plugins:
   - jekyll-feed
@@ -36,17 +41,16 @@ plugins:
   - jekyll-seo-tag
   - jekyll-multiple-languages-plugin
 
+# Internationalization
+languages: ["lt", "en"]
+exclude_from_localizations: ["images"]
+
+# Analytics
 jekyll_analytics:
   GoogleAnalytics:
     id: UA-59118080-2
 
-exclude:
-  - README.md
-  - LICENSE.txt
-  - Gemfile.lock
-  - Gemfile
-  - vendor
-
+# Staticman
 staticman_url: https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/enarmontas.github.io/master/comments
 reCaptcha:
   siteKey: 6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII
