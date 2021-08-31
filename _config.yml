@@ -18,7 +18,7 @@ markdown: kramdown
 include:
   - _pages
 languages: ["lt", "en"]
-exclude_from_localizations: ["assets/images"]
+exclude_from_localizations: ["images"]
 
 paginate: 5
 

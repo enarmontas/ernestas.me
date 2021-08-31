@@ -7,7 +7,7 @@ comments: true
 twitter: true
 ---
 
-![HP Aruba](/assets/images/2017/aruba_1.jpg)
+![HP Aruba](/images/2017/aruba_1.jpg)
 
 Guide for upgrading HP Aruba (formerly ProCurve) switch firmware.
 

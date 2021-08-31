@@ -10,7 +10,7 @@ redirect_from:
   - /2017/02/12/ubuntu-16.04-desktop-unattended-installation
 ---
 
-![Ubuntu Installation](/assets/images/2017/ubuntu_1.jpg)
+![Ubuntu Installation](/images/2017/ubuntu_1.jpg)
 
 I previously wrote a [tutorial](/2016/01/21/ubuntu-14.04-desktop-unattended-installation) on how to automate Ubuntu Desktop 14.04 LTS installation, but for 16.04 it didn't work because of some differences in installation media.
 

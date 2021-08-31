@@ -10,7 +10,7 @@ redirect_from:
   - /2016/01/21/ubuntu-14.04-desktop-unattended-installation
 ---
 
-![Ubuntu Installation](/assets/images/2016/ubuntu_1.png)
+![Ubuntu Installation](/images/2016/ubuntu_1.png)
 
 There are two most commonly used methods when it comes to automating Ubuntu installations: Preseed and Kickstart. The first one is an official method for Ubuntu to suppress all the questions in the installation process, but it has really steep learning curve if you are making automatic Ubuntu installer for the first time. Second method is really easy to start with because Ubuntu supports most of the RedHat's Kickstart options, but since it isn't an official method, we are still going to use some Preseed commands.
 
@@ -28,52 +28,52 @@ After the installation process is completed, open Kickstart Configurator using U
 When the Kickstart opens, choose the settings you need for your installation. You can review all possible options on the official Kickstart Configurator [documentation site](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/installation_guide/ch-redhat-config-kickstart). Here is the configuration I used:
 
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_2.png)
+![Kickstart Configurator](/images/2016/ubuntu_2.png)
 
 Very basic and self explanatory settings here. I used x86 architecture, because my devices had less than 4 GB of RAM.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_3.png)
+![Kickstart Configurator](/images/2016/ubuntu_3.png)
 
 If you want to install Ubuntu from CD-ROM or USB like I did, choose CD-ROM. If you want to install it from ISO file stored on FTP, HTTP servers or hard drive, choose appropriate options.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_4.png)
+![Kickstart Configurator](/images/2016/ubuntu_4.png)
 
 Keep boot loader options to default.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_5.png)
+![Kickstart Configurator](/images/2016/ubuntu_5.png)
 
 Be careful on this step and set the right partitioning information, because it can completely delete your current system. I installed Ubuntu on machines that had the same size HDDs with existing partitions. I just wanted to delete everything.
 Make sure to create <code>/boot</code>, <code>/</code> and <code>swap</code> partitions. In this example the first two partitions are in fixed size and the last one is set to fill all remaining space for <code>swap</code>.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_6.png)
+![Kickstart Configurator](/images/2016/ubuntu_6.png)
 
 Choose Static or DHCP.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_7.png)
+![Kickstart Configurator](/images/2016/ubuntu_7.png)
 
 Kept the default settings.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_8.png)
+![Kickstart Configurator](/images/2016/ubuntu_8.png)
 
 Enter your credentials. You can later change the password in <code>ks.cfg</code> file manually. If you chose to encrypt your password, the supported hash in Kickstart configuration is MD5. Use Open SSL command <code>openssl passwd -1 *yourpassword*</code> in Terminal to generate the new password.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_9.png)
+![Kickstart Configurator](/images/2016/ubuntu_9.png)
 
 Keep it disabled. Ubuntu doesn't support firewall settings.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_10.png)
+![Kickstart Configurator](/images/2016/ubuntu_10.png)
 
 Do not configure the X Window System here. Ubuntu automatically solves this one anyway.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_11.png)
+![Kickstart Configurator](/images/2016/ubuntu_11.png)
 
 Ubuntu doesn't support Kickstart package selection. We'll add them manually to <code>%packages</code> section in <code>ks.cfg</code> file.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_12.png)
+![Kickstart Configurator](/images/2016/ubuntu_12.png)
 
 Write anything that you need to do before starting Kickstart installation.
 
-![Kickstart Configurator](/assets/images/2016/ubuntu_13.png)
+![Kickstart Configurator](/images/2016/ubuntu_13.png)
 
 Write anything that you need to do after Kickstart installation. It executes the script in <code>chroot</code> environment, so you don't need to use <code>sudo</code>.
 
@@ -254,14 +254,14 @@ Create new ISO:
 
 Create bootable USB media using Ubuntu Startup Disk Creator from newly created `ubuntu-auto.iso` file :
 
-![Startup Disk Creator](/assets/images/2016/ubuntu_14.png)
+![Startup Disk Creator](/images/2016/ubuntu_14.png)
 
 After booting into USB, you should see something like this:
 
-![Grub Menu](/assets/images/2016/ubuntu_1.png)
+![Grub Menu](/images/2016/ubuntu_1.png)
 
 Press Enter and relax! The whole process will be seen as below, but you won't need to do anything.
 
-![Ubuntu Installation](/assets/images/2016/ubuntu_15.png)
+![Ubuntu Installation](/images/2016/ubuntu_15.png)
 
 [^1]: Tested using Ubuntu Server 14.04.03 on Ubuntu Desktop 14.04.03.

@@ -6,7 +6,7 @@ tags: gaming
 comments: true
 ---
 
-![Ingress](/assets/images/2015/ingress_1.jpg)
+![Ingress](/images/2015/ingress_1.jpg)
 
 Prieš mažiau nei pusmetį mano kolega, vaikščiojantis paniręs į savo iPad'ą aplink fontanus, skulptūras, pastatus ar kitus lankytinus objektus man atrodė kaip keistuolis. Ko ten vaikščioti jei net galvos nepakeli nuo ekrano? Kai to paties jo paklausiau, sužinojau kaip žaidžiamas Ingress.
 
@@ -36,8 +36,8 @@ Norint neatsilikti nuo kitų agentų, būtina žaisti, vaikščioti, važinėti,
 
 Nors pats žaidimas užtektinai įspraudžia į rutiną, dažnai ir pats susigalvoju tam tikras nerašytas taisykles. Ryte prieš darbą knieti atsiimti per naktį žaliųjų taksistų perimtus portalus, per pietų pertrauką taip pat norisi atsiimti tą nelemetą Vėjo malūną prie Hyperio, kuris šiandien jau ketvirtą kartą tapo žalias, vakare prie namų nenurimsiu kol nesugriausiu žalių plotų ir nepakeisiu jų mėlyna spalva. Mėlynas jūros vanduo juk geriau nei žalias kūdros dumblas?
 
-![Ingress](/assets/images/2015/ingress_2.jpg)
-![Ingress](/assets/images/2015/ingress_3.jpg)
+![Ingress](/images/2015/ingress_2.jpg)
+![Ingress](/images/2015/ingress_3.jpg)
 *Kauno centras prieš ir po darbo dienos. Keleto agentų rezultatas žaidžiant įprastu tempu*
 
 Kiekvieną dieną žaidžiant įprastu tempu sunku pastebėti kiek daug laiko suvalgo Ingress. Vėliau jau viskas, ką galiu padaryti, tai ant savęs grūmoti, kad vėl valandą paniręs į telefoną pravaikščiojau po Aukštųjų Šančių karių kapines be jokios didesnės prasmės.
@@ -47,7 +47,7 @@ Nesitikėkite, kad telefono baterija ištemps ilgiau nei parą laiko. Su Ingress
 
 Pradžioje, kai dar tik atsirado pirminis susidomėjimas žaidimu, baterijos išnaudojimas siekdavo net iki 90% vien tik Ingress. Tik po kurio laiko, nusistovėjus ir pradėjus žaisti lėčiau, rodikliai nukrito žemyn.
 
-![Baterijos naudojimas](/assets/images/2015/ingress_4.jpg)
+![Baterijos naudojimas](/images/2015/ingress_4.jpg)
 
 *Telefono baterijos išnaudojimo procentas žaidžiant neintensyviai*
 
@@ -64,7 +64,7 @@ Kad ir kaip erzintų visi prieš tai aprašyti dalykai šiame žaidime, yra kele
 Vaikščiojimas, bėgiojimas, važinėjimas dviračiu – tikrai prisideda prie sveikesnio gyvenimo būdo. Nors Ingress nėra pagrindinė motyvacija prabėgti ratą pro rajoną, bet planuojant maršrutą, jį dažnai nulemia portalų išsidėstymas mieste. Pradėjus žaisti pastebėjau, kad vietoj transporto mažais atstumais geriau renkuosi pasivaikščiojimą, nes tas vaikščiojimas jau nebe toks nuobodus kaip anksčiau.
 Tai, kad Ingress yra naudingas sveikatai, gali patvirtinti Trevor Clunn, kurio istorija [čia](https://plus.google.com/117343382605414628098/posts/NPDDgi7QveX).
 
-![Trevor Clunn](/assets/images/2015/ingress_5.png)
+![Trevor Clunn](/images/2015/ingress_5.png)
 
 *Žmogus kuriam pavyko numesti svorio Ingress pagalba. [Nuotraukos šaltinis](https://plus.google.com/117343382605414628098/posts/NPDDgi7QveX).*
 
@@ -78,7 +78,7 @@ Prie to paties galiu paminėti Ingress misijas, kuriamas pačių žaidėjų. Tai
 
 Per Ingress pavyko susipažinti su daug įdomių vietų Lietuvoje, o Kleboniškio miškas – puikus to pavyzdys.
 
-![Kleboniškio miškas](/assets/images/2015/ingress_6.jpeg)
+![Kleboniškio miškas](/images/2015/ingress_6.jpeg)
 *Resistance agentai Kauno miškuose.*
 
 #### Bendruomenė
@@ -89,7 +89,7 @@ Komunikacija su kitais žaidėjais neapsiriboja internetu. Dažnai prie portalų
 
 Žinoma, visur atsiranda ir išimčių. Būna tokių, kurie per daug rimtai reaguoja į žaidimą, pradeda aiškinti, kokius portalus galima pulti, o kurių ne. Pradeda ieškoti *Guardian'ų*, kitaip trukdo mėgautis žaidimu. Kai kurie net pasiryžta nuvažiuoti 20 km prie vieno portalo, kad asmeniškai pakenktų ir jį užimtų. Tai šiek tiek kvaila, bet pasitaiko įvairių žaidėjų tipų.
 
-![Agentai](/assets/images/2015/ingress_7.jpeg)
+![Agentai](/images/2015/ingress_7.jpeg)
 *Ingress agentai Aleksote.*
 
 #### Strategija ir bendradarbiavimas
@@ -99,7 +99,7 @@ Per [BornholmSun](https://plus.google.com/u/0/109924548202311239959/posts/c6fT1Y
 
 Dar viena preciziško organizuotumo reikalaujanti operacija [BlueGreenPlanet](https://plus.google.com/+penki/posts/HfruDZshgcy), vykusi Nakano, Tokijuje, parodo, kad net ir priešingos frakcijos gali susikooperuoti kūrybiškam tikslui. Nereikia pasakoti, koks Tokijus milžiniškas miestas ir koks didžiulis judėjimas ten vyksta, kiek per dieną Ingress žaidėjų blaškosi po jo gatves ir bet kada gali sutrukdyti, nieko nenutuokdami, kad šiuo metu mieste Ingress žaidėjai piešia Žemės planetą.
 
-![BlueGreenPlanet](/assets/images/2015/ingress_8.png)
+![BlueGreenPlanet](/images/2015/ingress_8.png)
 *Kairėje pusėje organizuotas vs. dešinėje pusėje įprastas žaidimas. [Nuotraukos šaltinis](https://plus.google.com/117743506363191300623/posts/2XY1nE1goTQ).*
 
 Kitas įdomus pavyzdys yra [SummerBreeze](https://plus.google.com/+JuliaVivienneLoverdose/posts/jNs45gisbpL), kai *Resistance* agentai atostogų metu uždengė visą Europą. Yra ir [daugiau](https://plus.google.com/collection/goshX) pavyzdžių, kuriems įgyvendinti reikia didžiulio planavimo, bendradarbiavimo ir organizavimo, bet apie juos jau pakanka šiam kartui.
@@ -112,7 +112,7 @@ Ingress vyksta [*XM* anomalijos](https://www.ingress.com/events/archives.html) �
 Viena tokių serijų, pavadinimu Shōnin, vyko nuo 2015-02-21 iki 2015-05-30. Skirtingomis dienomis serijos renginiai persikeldavo vis į kitus pasaulio miestus. Man pačiam teko dalyvauti vietiniame Shōnin [NR03-FOXTROT-02](https://plus.google.com/+Ingress/posts/fpDqrifWztv), kurį laimėjome mes, surinkdami 12,023 taškus, kai tuo tarpu *Enlightened* surinko 0,381.
 Patirtis – įdomi ir verta to pusdienio, praleisto panirus į telefoną. Net neabejoju, kad dalyvauti pagrindinėje anomalijoje dar linksmiau.
 
-![Persepolis](/assets/images/2015/ingress_9.jpg)
+![Persepolis](/images/2015/ingress_9.jpg)
 *Įprastas vaizdas iš globalios anomalijos. Persepolis Portlande, JAV. [Nuotraukos šaltinis](https://plus.google.com/+Ingress/posts/Ve17yZPhyE3).*
 
 Koks dar žaidimas gali suburti tiek *geek'ų* į vieną krūva realybėje ir tuo pačiu žaisme?
