@@ -1,13 +1,13 @@
-global:
-  language: English 🇬🇧
-  author_tagline: Autorius
-  theme_credits: |
-    Sukasi ant <a href="https://jekyllrb.com/">Jekyll</a> naudojant
-    <a href="https://github.com/chesterhow/tale/">Tale</a> temą.
-
 titles:
+  author: Autorius
   about: Apie
   posts: Įrašai
+  language: English 🇬🇧
+
+footer:
+  credits: |
+    Sukasi ant <a href="https://jekyllrb.com/">Jekyll</a> naudojant
+    <a href="https://github.com/chesterhow/tale/">Tale</a> temą.
 
 staticman:
   name_field: Vardas

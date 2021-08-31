@@ -1,13 +1,13 @@
-global:
-  language: Lietuviškai 🇱🇹
-  author_tagline: Author
-  theme_credits: |
-    Made with <a href="https://jekyllrb.com/">Jekyll</a> and
-    <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
-
 titles:
+  author: Author
   about: About
   posts: Posts
+  language: Lietuviškai 🇱🇹
+
+footer:
+  credits: |
+    Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+    <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
 
 staticman:
   name_field: Name
