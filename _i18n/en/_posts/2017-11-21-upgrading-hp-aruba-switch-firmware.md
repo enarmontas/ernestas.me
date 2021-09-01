@@ -4,10 +4,11 @@ title: "Upgrading HP Aruba Switch Firmware"
 date: 2017-11-21
 tags: networking hardware
 comments: true
-twitter: true
+redirect_from:
+  - /2017/11/21/upgrading-hp-aruba-switch-firmware
 ---
 
-![HP Aruba](/assets/images/2017/aruba_1.jpg)
+![HP Aruba](/images/2017/aruba_1.jpg)
 
 Guide for upgrading HP Aruba (formerly ProCurve) switch firmware.
 

@@ -4,6 +4,8 @@ title: "Hello, World! (v.2.0.0)"
 date: 2020-07-09
 tags: blog
 comments: false
+redirect_from:
+  - /2020/07/09/hello-world-v2
 ---
 Recently I have started working as a Site Reliability Engineer at [Vinted](https://vinted.com). For the first time in my career I am working with production infrastructure and that brings me lot's of new challenges.
 

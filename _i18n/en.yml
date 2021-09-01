@@ -1,0 +1,29 @@
+titles:
+  author: Author
+  about: About
+  posts: Posts
+  language: Lietuviškai 🇱🇹
+
+footer:
+  credits: |
+    Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+    <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+
+staticman:
+  name_field: Name
+  name_placeholder: Your name (required)
+  email_field: E-mail
+  email_placeholder: Your email (optional)
+  comment_section: Comments
+  comment_add: Add Comment
+  comment_submit: Submit
+  comment_placeholder: Your comment (markdown accepted)
+  comment_link: Permalink to this comment
+  comment_modal_title: Comment submitted
+  comment_modal_close: Close
+  comment_modal_sending: Sending...
+  comment_modal_error_title: Error
+  comment_modal_error_text: An error occured
+  comment_confirmation: Thanks! Comment will be published in a few minutes.
+  reply_cancel: cancel reply
+  reply_to: Reply to

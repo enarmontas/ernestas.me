@@ -4,10 +4,11 @@ title: "Using USB to RS232 Cable with Mac Terminal"
 date: 2016-03-16
 tags: hardware
 comments: true
-twitter: true
+redirect_from:
+  - /2016/03/16/using-usb-to-rs232-cable-with-mac-terminal
 ---
 
-![USB to RS232](/assets/images/2016/usb-to-rs232_1.jpg)
+![USB to RS232](/images/2016/usb-to-rs232_1.jpg)
 
 I don't think there is a modern laptop that has serial ports, but many networking devices still use them for local connection. It happens rarely, but I need to use console port from time to time. I knew how to use the adapter on Windows systems, but on OS X it's a little different. Here's the process:
 
@@ -25,7 +26,7 @@ Installing the drivers is straight forward – open `.pkg` file and continue thr
 ## 3. Check if the drivers are properly installed
 Go to System Preferences > Network and make sure new device called USB-Serial Controller D is in the list. It should look similar to this:
 
-![Network Preferences](/assets/images/2016/usb-to-rs232_2.png)
+![Network Preferences](/images/2016/usb-to-rs232_2.png)
 
 Now open Terminal and type in this command:
 

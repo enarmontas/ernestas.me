@@ -4,12 +4,13 @@ title: "Function Over Form: Mounting External SSD On MacBook"
 date: 2021-03-08
 tags: macbook samsung ssd macgyver tipsandtricks lightroom
 comments: true
-twitter: true
 summary: "Here is an awesome MacGyver solution for expanding MacBook storage. Mounting external SSD on the back of a laptop with self adhesive velcro tape."
+redirect_from:
+  - /2021/03/08/function-over-form-mounting-external-ssd-on-macbook
 ---
 Here is an awesome MacGyver[^1] solution for expanding MacBook storage.
 
-![MacBook Pro with External SSD](/assets/images/2021/macbook-ssd-1.jpg)
+![MacBook Pro with External SSD](/images/2021/macbook-ssd-1.jpg)
 
 ### Problem
 I use Lightroom CC for editing my photos, so I need to have them on my computer during editing. Currently, my library consists of 20K RAW photos, which takes 350GB of storage. My MacBook Pro comes with 256GB internal SSD, so it can't store my library.
@@ -25,21 +26,21 @@ Mount external SSD on the back of my laptop with self adhesive velcro tape.
 I was watching Silicon Valley and I noticed that Richard Hendricks had a MacBook with a dongle sticked to the back. This is where I got the idea!
 It's nothing new or unique, but I never stumbled on it.
 
-![MacBook Pro with External SSD](/assets/images/2021/apple-macbook-laptop-used-by-thomas-middleditch-as-richard-hendricks-in-silicon-valley-s6e1.jpg)
+![MacBook Pro with External SSD](/images/2021/apple-macbook-laptop-used-by-thomas-middleditch-as-richard-hendricks-in-silicon-valley-s6e1.jpg)
 
 ### Process
 
 Cut the velcro tape to required length.
-![MacBook Pro with External SSD](/assets/images/2021/macbook-ssd-2.jpg)
+![MacBook Pro with External SSD](/images/2021/macbook-ssd-2.jpg)
 
 Stick the rough side velcro on the external drive, soft side on the laptop.
-![MacBook Pro with External SSD](/assets/images/2021/macbook-ssd-3.jpg)
+![MacBook Pro with External SSD](/images/2021/macbook-ssd-3.jpg)
 
 Join both velcro sides together.
-![MacBook Pro with External SSD](/assets/images/2021/macbook-ssd-4.jpg)
+![MacBook Pro with External SSD](/images/2021/macbook-ssd-4.jpg)
 
 Profit!
-![MacBook Pro with External SSD](/assets/images/2021/macbook-ssd-5.jpg)
+![MacBook Pro with External SSD](/images/2021/macbook-ssd-5.jpg)
 
 **Gear Used**
 
@@ -56,7 +57,7 @@ I posted this solution to [r/techsupportmacgyver](https://www.reddit.com/r/techs
 
 It was interesting to see that it sparked a lot of discussion about function over form. People on r/macbookpro were more sceptical than r/techsupportmacgyver or r/laptops, but most people had positive reactions. [This thread](https://www.reddit.com/r/macbookpro/comments/lyz5jq/solution_for_external_ssd/gpyfaei?utm_source=share&utm_medium=web2x&context=3) illustrates it perfectly:
 
-![MacBook Pro with External SSD](/assets/images/2021/macbook-reddit-screenshot.png)
+![MacBook Pro with External SSD](/images/2021/macbook-reddit-screenshot.png)
 
 I can only agree. Function over form, not vice versa. We should use our devices to do real work, not treat them like jewellery.
 

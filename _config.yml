@@ -13,29 +13,16 @@ author:
   github: enarmontas
 
 # Settings
-permalink: /:year/:month/:day/:slug
+permalink: /:slug
 markdown: kramdown
-include:
-  - _pages
-
 paginate: 5
 
 sass:
-  sass_dir:     _sass
-  style:        compressed
+  sass_dir: _sass
+  style: compressed
 
-plugins:
-  - jekyll-feed
-  - jekyll-paginate
-  - jekyll-redirect-from
-  - jekyll_github_sample
-  - jekyll-twitter-plugin
-  - jekyll-analytics
-  - jekyll-seo-tag
-
-jekyll_analytics:
-  GoogleAnalytics:
-    id: UA-59118080-2
+include:
+  - _pages
 
 exclude:
   - README.md
@@ -44,6 +31,26 @@ exclude:
   - Gemfile
   - vendor
 
+plugins:
+  - jekyll-analytics
+  - jekyll-feed
+  - jekyll-multiple-languages-plugin
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-twitter-plugin
+  - jekyll_github_sample
+
+# Internationalization
+languages: ["en", "lt"]
+exclude_from_localizations: ["images"]
+
+# Analytics
+jekyll_analytics:
+  GoogleAnalytics:
+    id: UA-59118080-2
+
+# Staticman
 staticman_url: https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/enarmontas.github.io/master/comments
 reCaptcha:
   siteKey: 6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII
