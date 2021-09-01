@@ -4,6 +4,8 @@ title: "Kodėl parsisiųsi Ingress, jo nekęsi, bet kasdien žaisi"
 date: 2015-08-01
 tags: gaming
 comments: true
+redirect_from:
+  - /2015/08/01/kodel-parsisiusi-ingress-jo-nekesi-bet-kasdien-zaisi
 ---
 
 ![Ingress](/images/2015/ingress_1.jpg)

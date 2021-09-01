@@ -4,9 +4,9 @@ title: "Ubuntu 14.04 Desktop Unattended Installation"
 date: 2016-01-21
 tags: linux ubuntu automation
 comments: true
-twitter: true
 redirect_from:
-  - /ubuntu-14-04-desktop-unattended-installation
+  - /ubuntu-1404-desktop-unattended-installation
+  - /2016/01/21/ubuntu-1404-desktop-unattended-installation
   - /2016/01/21/ubuntu-14.04-desktop-unattended-installation
 ---
 
