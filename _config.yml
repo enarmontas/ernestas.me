@@ -42,7 +42,7 @@ plugins:
   - jekyll-multiple-languages-plugin
 
 # Internationalization
-languages: ["lt", "en"]
+languages: ["en", "lt"]
 exclude_from_localizations: ["images"]
 
 # Analytics

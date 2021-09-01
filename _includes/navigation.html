@@ -1,7 +1,7 @@
-{% if site.lang == "lt" %}
-  {% capture link %}{{ site.baseurl_root }}/en/{% endcapture %}
-{% elsif site.lang == "en" %}
-  {% capture link %}{{ site.baseurl_root }}/{% endcapture %}
+{% if site.lang == "en" %}
+  {% capture language_switch_link %}{{ site.baseurl_root }}/lt/{% endcapture %}
+{% elsif site.lang == "lt" %}
+  {% capture language_switch_link %}{{ site.baseurl_root }}/{% endcapture %}
 {% endif %}
 
 <nav class="nav">
@@ -12,7 +12,7 @@
     <ul>
       <li><a href="{{ site.baseurl }}/">{% translate titles.posts %}</a></li>
       <li><a href="{% translate_link about %}">{% translate titles.about %}</a></li>
-      <li><a href="{{ link }}">{% translate titles.language %}</a></li>
+      <li><a href="{{ language_switch_link }}">{% translate titles.language %}</a></li>
     </ul>
   </div>
 </nav>
