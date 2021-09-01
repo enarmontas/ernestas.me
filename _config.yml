@@ -32,14 +32,14 @@ exclude:
   - vendor
 
 plugins:
+  - jekyll-analytics
   - jekyll-feed
+  - jekyll-multiple-languages-plugin
   - jekyll-paginate
   - jekyll-redirect-from
-  - jekyll_github_sample
-  - jekyll-twitter-plugin
-  - jekyll-analytics
   - jekyll-seo-tag
-  - jekyll-multiple-languages-plugin
+  - jekyll-twitter-plugin
+  - jekyll_github_sample
 
 # Internationalization
 languages: ["en", "lt"]
