@@ -4,6 +4,9 @@ titles:
   posts: Įrašai
   language: English 🇬🇧
 
+templates:
+  post_source: Įrašas originaliai publikuotas
+
 footer:
   credits: |
     Sukasi ant <a href="https://jekyllrb.com/">Jekyll</a> naudojant

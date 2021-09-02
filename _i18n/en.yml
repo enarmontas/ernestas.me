@@ -4,6 +4,9 @@ titles:
   posts: Posts
   language: Lietuviškai 🇱🇹
 
+templates:
+  post_source: Post originally published
+
 footer:
   credits: |
     Made with <a href="https://jekyllrb.com/">Jekyll</a> and
