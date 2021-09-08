@@ -2,7 +2,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% seo %}
+  {% capture title_key %}{{ page.title | remove_first: "titles." }}{% endcapture %}
+
+  {% if site.translations[site.lang].titles[title_key] %}
+      {% capture title %}{% translate page.title %} | {{ site.title }}{% endcapture %}
+  {% elsif page.title %}
+    {% capture title %}{{ page.title }} | {{ site.title }}{% endcapture %}
+  {% else %}
+    {% capture title %}{{ site.title }}{% endcapture %}
+  {% endif %}
+
+  <title>{{ title }}</title>
+
+  {% seo title=false %}
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
