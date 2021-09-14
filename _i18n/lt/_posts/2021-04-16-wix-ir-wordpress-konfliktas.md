@@ -11,7 +11,7 @@ source:
 Prieš keletą savaičių Wix paleido reklamos kampaniją nukreiptą prieš WordPress. Wix pašiepia WordPress trūkumus, kurių tikrai yra nemažai.
 
 Pavyzdžiui, vienas iš epizodų:
-{% include youtube.html id='fZtovVxp67M' %}
+{% include embed-youtube.html id='fZtovVxp67M' %}
 
 WordPress įkūrėjas Matt Mullenweg nebuvo sužavėtas ir atrašė [kandų atsakymą](https://ma.tt/2021/04/wix-dirty-tricks), kuriame išdėsto ir Wix problemas.
 

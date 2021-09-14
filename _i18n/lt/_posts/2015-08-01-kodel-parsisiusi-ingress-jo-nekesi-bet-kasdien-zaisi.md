@@ -18,7 +18,7 @@ Prieš mažiau nei pusmetį mano kolega, vaikščiojantis paniręs į savo iPad'
 
 > The world around you is not what it seems
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Ss-Z-QjFUio" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% include embed-youtube.html id='Ss-Z-QjFUio' %}
 
 Wikipedia sako:
 > Ingress is an augmented reality massively multiplayer online role playing location-based game created by Niantic Labs, a startup within Google.
