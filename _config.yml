@@ -39,6 +39,7 @@ plugins:
   - jekyll-paginate
   - jekyll-redirect-from
   - jekyll-seo-tag
+  - jekyll-sitemap
   - jekyll-twitter-plugin
   - jekyll_github_sample
 
