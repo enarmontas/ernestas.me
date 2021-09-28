@@ -1,6 +1,6 @@
 # enarmontas.github.io
 
-### Run
+### Run Locally
 ```
 bundle install
 bundle exec jekyll serve
