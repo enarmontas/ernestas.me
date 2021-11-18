@@ -98,12 +98,11 @@ so I would need to pass additional parameters to driftctl for authentication to 
 Since I am using [Consul backend](/storing-terraform-state-in-consul) and my configuration is
 defined in the Terragrunt code, I will run `terragrunt state pull` on each of my modules.
 It will automatically generate Terraform backend config and pull the state to a local folder.
-
 Then, I will pass my local state files using glob pattern to `driftctl scan` command.
 
 Here is the process.
 
-Go to the target Terragrunt account:
+Go to the target AWS account in your Terragrunt repository:
 ```
 cd <terragrunt>/<account>
 ```
@@ -140,7 +139,7 @@ Now that we have our Terragrunt state files locally,
 we can go to the next step and actually detect the infrastructure drift.
 
 ### Detect Infrastructure Drift
-driftctl scans all live resources in the same account that AWS is authenticated to.
+Driftctl scans all live resources in the same account that AWS is authenticated to.
 
 If the AWS CLI region is set to `eu-west-2`, but the state files have resources from `eu-west-1`
 region, it will show that resources are found in the state, but not in the AWS account.
