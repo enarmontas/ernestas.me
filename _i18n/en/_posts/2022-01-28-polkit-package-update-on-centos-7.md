@@ -11,7 +11,7 @@ summary: |
 Warning to anyone who is preparing for `polkit` upgrade due to
 [CVE-2021-4034](https://access.redhat.com/security/vulnerabilities/RHSB-2022-001) vulnerability!
 
-Simple `polkit` package update disrupts Docker bridge networking,
+Simple `polkit` package update from `0.112-26.el7` to `0.112-26.el7_9.1` disrupts Docker bridge networking,
 so Docker service restart is required to bring the networking back.
 Service restart also restarts the containers, so expect some downtime.
 
