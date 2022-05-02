@@ -9,7 +9,7 @@ comments:
       type: date
       options:
         format: "timestamp-seconds"
-  moderation: false
+  moderation: true
   name: "ernestas.me"
   # notifications:
   #   enabled: true
