@@ -1,0 +1,8 @@
+_id: 7e7b4d00-ca5a-11ec-a610-a71b942ade1f
+_parent: 'https://ernestas.me/static-comments-for-jekyll-with-github-pages'
+replying_to_uid: ''
+message: "Each comment has a permalink with unique ID. When you reply to the comment, the ID is saved to the `replying_to_uid` field, which is then rendered as a reply. You can see an example PR [here](https://github.com/enarmontas/enarmontas.github.io/pull/24). \r\n\r\nHowever, it doesn't support nested replies, that's why I can't reply directly to you now, but I can always use the same thread."
+name: Ernestas
+email: ''
+hp: ''
+date: 1651525056
