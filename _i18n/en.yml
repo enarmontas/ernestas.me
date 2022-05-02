@@ -27,6 +27,6 @@ staticman:
   comment_modal_sending: Sending...
   comment_modal_error_title: Error
   comment_modal_error_text: An error occured
-  comment_confirmation: Thanks! Comment will be published in a few minutes.
+  comment_confirmation: Thanks! Comment will be published after approval.
   reply_cancel: cancel reply
   reply_to: Reply to

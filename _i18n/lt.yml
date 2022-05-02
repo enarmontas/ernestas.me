@@ -27,6 +27,6 @@ staticman:
   comment_modal_sending: Siunčiama
   comment_modal_error_title: Klaida!
   comment_modal_error_text: Įvyko klaida
-  comment_confirmation: Ačiū! Komentaras bus publikuotas per keletą minučių.
+  comment_confirmation: Ačiū! Komentaras bus publikuotas po patvirtinimo.
   reply_cancel: atšaukti atsakymą
   reply_to: Atrašyti
