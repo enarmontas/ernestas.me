@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "On-Call: Leave It Better Than You Found It"
-date: 2021-01-14
+date: 2021-11-14
 tags: devops helpdesk career
 comments: true
 ---
-For the past year, I have been participating in on-call rotations as a Site Reliability Engineer at Vinted. 
+For more than a year, I have been participating in on-call rotations as a Site Reliability Engineer at Vinted. 
 
 During on-call, SRE handles all incidents, reacts to alerts, and responds to developer requests. It basically solves any issues that occur throughout the infrastructure. 
 
