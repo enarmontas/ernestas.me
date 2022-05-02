@@ -16,7 +16,7 @@ author:
 # Settings
 permalink: /:slug
 markdown: kramdown
-paginate: 6
+paginate: 5
 
 sass:
   sass_dir: _sass
