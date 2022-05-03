@@ -8,13 +8,14 @@
     {% assign comments_by_date = comments | sort: 'date' | reverse %}
     <!-- List main comments in reverse date order, newest first. List replies in date order, oldest first. -->
     {% for comment in comments_by_date %}
-    {%- assign email           = comment.email %}
-    {%- assign name            = comment.name %}
-    {%- assign url             = comment.url %}
-    {%- assign date            = comment.date %}
-    {%- assign message         = comment.message %}
-    {%- assign uid             = comment._id %}
-    {% include static_comment.html is_reply=false uid=uid replying_to=0 email=email name=name url=url date=date message=message uid=uid %}
+    {%- assign email = comment.email %}
+    {%- assign name = comment.name %}
+    {%- assign url = comment.url %}
+    {%- assign date = comment.date %}
+    {%- assign message = comment.message %}
+    {%- assign uid = comment._id %}
+    {% include static_comment.html is_reply=false uid=uid replying_to=0 email=email name=name url=url date=date
+    message=message uid=uid %}
     {% endfor %}
   </div>
   {% endif %}
