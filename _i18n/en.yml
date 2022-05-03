@@ -5,8 +5,13 @@ titles:
   language: Lietuviškai 🇱🇹
 
 templates:
-  post_source: Post originally published
-
+  post_source: Post originally published on
+  twitter:
+    link_name: Twitter
+    content: |
+      Thank you for reading. If you have any questions, 
+      drop the comment below or send me a message on
+  
 footer:
   credits: |
     Made with <a href="https://jekyllrb.com/">Jekyll</a> and

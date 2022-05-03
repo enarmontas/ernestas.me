@@ -4,6 +4,7 @@ title: "Detect Terragrunt Infrastructure Drift With Driftctl"
 date: 2021-11-17
 tags: terraform terragrunt driftctl
 comments: true
+twitter: narmontase
 summary: |
   Driftctl is a tool that helps detect infrastructure drift by comparing Terraform state with live
   resources. Here is how to use it with Terragrunt.

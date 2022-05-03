@@ -6,6 +6,11 @@ titles:
 
 templates:
   post_source: Įrašas originaliai publikuotas
+  twitter:
+    link_name: Twitter
+    content: |
+      Ačiū, kad skaitote! 
+      Jeigu turite klausimų, rašykite komentarą arba kreipkitės tiesiai per
 
 footer:
   credits: |

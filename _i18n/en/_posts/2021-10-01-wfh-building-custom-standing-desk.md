@@ -4,6 +4,7 @@ title: "Working From Home: Building Custom Standing Desk"
 date: 2021-10-01
 tags: wfh workplace remote-work
 comments: true
+twitter: narmontase
 featured_image: /images/2021/10/home-office-9.jpg
 ---
 During the pandemic, I got a standing desk from my work office. 

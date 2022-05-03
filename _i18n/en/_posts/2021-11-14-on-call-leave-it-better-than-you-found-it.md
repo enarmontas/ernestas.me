@@ -4,6 +4,7 @@ title: "On-Call: Leave It Better Than You Found It"
 date: 2021-11-14
 tags: devops helpdesk career
 comments: true
+twitter: narmontase
 ---
 For more than a year, I have been participating in on-call rotations as a Site Reliability Engineer at Vinted. 
 

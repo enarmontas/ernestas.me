@@ -3,7 +3,7 @@ layout: post
 title: "GitHub Uptime and Microsoft"
 date: 2020-07-13
 tags: github git
-comments: true
+comments: false
 redirect_from:
   - /2020/07/13/github-uptime-and-microsoft
 ---

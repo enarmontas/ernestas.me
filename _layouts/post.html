@@ -24,14 +24,18 @@ layout: default
 
   {{ content }}
 
-  {% if page.source.url and page.source.name %}
-    {% include source.html name=page.source.name url=page.source.url %}
-  {% endif %}
-
 </div>
 
+{% if page.twitter %}
+{% include underline-twitter.html username=page.twitter %}
+{% endif %}
+
+{% if page.source.url and page.source.name %}
+{% include source.html name=page.source.name url=page.source.url %}
+{% endif %}
+
 {% if page.comments %}
-  {% include static_comments.html %}
+{% include static_comments.html %}
 {% endif %}
 
 <div class="pagination">

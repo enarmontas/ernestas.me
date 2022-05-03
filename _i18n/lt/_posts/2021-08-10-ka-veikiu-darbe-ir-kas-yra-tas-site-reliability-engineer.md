@@ -4,6 +4,11 @@ title: "Ką veikiu darbe ir kas yra tas Site Reliability Engineer?"
 date: 2021-08-10
 tags: sre, work, vinted
 comments: true
+twitter: narmontas
+source: 
+  name: LinkedIn
+  url: https://www.linkedin.com/posts/enarmontas_kai-draugai-ir-%C5%A1eima-manes-klausia-k%C4%85-veikiu-activity-6830832436704800768-ML_I
+twitter: narmontas
 ---
 
 ![Tinklo srautas į Consul serverius](/images/2021/consul-traffic.jpg)
@@ -33,5 +38,3 @@ Atlikau daug testų, parašiau nemažai kodo kuris konfigūruoja Consul, pakeič
 Rezultatas: Consul veikia stabiliai ir nekelia galvos skausmo įmonėje. Bent jau kol kas. Grafike matosi kaip sumažėjo tinklo srautas į Consul serverius.
 
 Tai ką aš veikiu Vinted? Gerinu sistemų veikimą ir taip didinu svetainės (*site*) patikimumą (*reliability*).
-
-*Įrašas originaliai publikuotas [LinkedIn](https://www.linkedin.com/posts/enarmontas_kai-draugai-ir-%C5%A1eima-manes-klausia-k%C4%85-veikiu-activity-6830832436704800768-ML_I)*.

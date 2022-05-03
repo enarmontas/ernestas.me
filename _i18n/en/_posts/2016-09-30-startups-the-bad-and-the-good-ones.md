@@ -3,7 +3,7 @@ layout: post
 title: "Startups: The Bad And The Good Ones"
 date: 2016-09-30
 tags: startups business
-comments: true
+comments: false
 ---
 Sometimes we fall into products that barely make any change or solve any problems. It leads other people into creating more products that are useless but presented otherwise.
 

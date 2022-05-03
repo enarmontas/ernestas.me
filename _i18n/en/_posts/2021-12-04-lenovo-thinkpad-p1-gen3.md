@@ -5,6 +5,7 @@ date: 2021-12-04
 tags: wfh workplace remote-work
 comments: true
 featured_image: /images/2021/12/thinkpad-p1-gen3-3.jpg
+twitter: narmontase
 ---
 
 I’ve used Linux for many years on servers, but still kept macOS as my main working environment for almost ten years now. A few months ago, I gave up on macOS and started using Fedora as my main operating system on the ThinkPad P1 Gen3 15".

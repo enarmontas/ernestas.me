@@ -4,6 +4,7 @@ title: "Cache Consul DNS TTL With Dnsmasq"
 date: 2020-11-17
 tags: hashicorp consul dnsmasq dns
 comments: true
+twitter: narmontase
 redirect_from:
   - /2020/11/17/cache-consul-dns-ttl-with-dnsmasq
 ---
