@@ -6,7 +6,7 @@ Before that, I worked as Systems Administrator at [Wix](https://wix.com) and
 Network Administrator at [VMU](https://www.vdu.lt/en).
 
 In this blog, I'm sharing my opinion and experience about personal and work projects.
-I'm documenting my learnings and mistakes, so others can learn from them.
+I'm documenting my lessons and mistakes, so others can learn from them.
 
 In my spare time, I'm usually reading, writing, exploring interesting places
 and [photographing architecture](https://www.instagram.com/ernestas.n/).
