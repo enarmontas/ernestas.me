@@ -47,6 +47,13 @@ plugins:
 languages: ["en", "lt"]
 exclude_from_localizations: ["images"]
 
+# Defaults / https://jekyllrb.com/docs/configuration/front-matter-defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/site/terminal-1600-800.jpg
+
 # Analytics
 jekyll_analytics:
   GoogleAnalytics:
