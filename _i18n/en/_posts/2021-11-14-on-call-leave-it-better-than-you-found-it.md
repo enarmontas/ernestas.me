@@ -6,11 +6,12 @@ tags: devops helpdesk career
 comments: true
 twitter: narmontase
 ---
-For more than a year, I have been participating in on-call rotations as a Site Reliability Engineer at Vinted. 
+During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. 
+They solve any issues that occur 24/7 throughout the infrastructure. 
 
-During on-call, SRE handles all incidents, reacts to alerts, and responds to developer requests. It basically solves any issues that occur throughout the infrastructure. 
-
-Here are the practical things I learned about the process.
+In the past two years, I've been participating in on-call rotations as a 
+Site Reliability Engineer at Vinted. 
+Here are some of the practical lessons I've learned about the process.
 
 ## Prepare Your Tools
 My first on-call felt too quiet. I wasn’t getting any alerts or requests. This was because my phone automatically went into "do not disturb" mode.
