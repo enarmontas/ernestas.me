@@ -5,7 +5,7 @@ date: 2021-10-01
 tags: wfh workplace remote-work
 comments: true
 twitter: narmontase
-featured_image: /images/2021/10/home-office-9.jpg
+image: /images/2021/10/custom-desk-29.png
 ---
 During the pandemic, I got a standing desk from my work office. 
 The plain white desk reminded me of the place where it came from: my office. 

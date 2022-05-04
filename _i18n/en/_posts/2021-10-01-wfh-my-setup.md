@@ -5,7 +5,7 @@ date: 2021-10-01
 tags: wfh workplace remote-work
 comments: true
 twitter: narmontase
-featured_image: /images/2021/10/home-office-3.jpg
+image: /images/2021/10/home-office-3.jpg
 ---
 Since the pandemic happened, I always wanted to create a minimal,
 but ergonomic working environment at home.

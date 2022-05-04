@@ -4,7 +4,7 @@ title: "Lenovo ThinkPad P1 Gen3 Review (with Linux)"
 date: 2021-12-04
 tags: wfh workplace remote-work
 comments: true
-featured_image: /images/2021/12/thinkpad-p1-gen3-3.jpg
+image: /images/2021/10/home-office-5.jpg
 twitter: narmontase
 ---
 
