@@ -4,7 +4,6 @@ title: "On Call vs. On-Duty"
 date: 2020-08-23
 tags: oncall onduty devops sre
 comments: true
-twitter: narmontase
 redirect_from:
   - /2020/08/23/on-call-vs-on-duty
 ---

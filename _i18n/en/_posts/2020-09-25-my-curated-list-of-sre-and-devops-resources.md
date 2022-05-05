@@ -4,7 +4,6 @@ title: "My Curated List of SRE and DevOps Resources"
 date: 2020-09-25
 tags: devops sre
 comments: true
-twitter: narmontase
 redirect_from:
   - /2020/09/25/my-curated-list-of-sre-and-devops-resources
 ---

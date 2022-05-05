@@ -4,7 +4,6 @@ title: "Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams"
 date: 2021-02-16
 tags: citybee, security, privacy
 comments: true
-twitter: narmontas
 source:
   name: LinkedIn
   url: https://www.linkedin.com/pulse/kaip-veikia-slapta%C5%BEod%C5%BEiai-ir-%C4%AFsp%C4%97jimas-citybee-ernestas-narmontas-/

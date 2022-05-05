@@ -4,7 +4,6 @@ title: "Function Over Form: Mounting External SSD On MacBook"
 date: 2021-03-08
 tags: macbook samsung ssd macgyver tipsandtricks lightroom
 comments: true
-twitter: narmontase
 summary: "Here is an awesome MacGyver solution for expanding MacBook storage. Mounting external SSD on the back of a laptop with self adhesive velcro tape."
 redirect_from:
   - /2021/03/08/function-over-form-mounting-external-ssd-on-macbook

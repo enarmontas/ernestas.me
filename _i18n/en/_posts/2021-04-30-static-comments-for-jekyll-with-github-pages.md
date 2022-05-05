@@ -4,7 +4,6 @@ title: "Static Comments for Jekyll with GitHub Pages"
 date: 2021-04-30
 tags: jekyll staticman github githubpages
 comments: true
-twitter: narmontase
 summary: "Staticman is an open source static comment solution for your Jekyll site"
 redirect_from:
   - /2021/04/30/staticman

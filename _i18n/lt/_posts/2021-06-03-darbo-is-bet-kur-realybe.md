@@ -4,7 +4,6 @@ title: "Darbo iš bet kur realybė"
 date: 2021-06-03
 tags: work-from-anywhere, remote-work
 comments: true
-twitter: narmontas
 source:
   name: LinkedIn
   url: https://www.linkedin.com/posts/enarmontas_nuotolinisdarbas-remotework-activity-6806225173780471808-sCM9
