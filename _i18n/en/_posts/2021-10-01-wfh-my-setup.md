@@ -3,7 +3,6 @@ layout: post
 title: "Working From Home: My Setup"
 date: 2021-10-01
 tags: wfh workplace remote-work
-comments: true
 image: /images/2021/10/home-office-3.jpg
 ---
 Since the pandemic happened, I always wanted to create a minimal,

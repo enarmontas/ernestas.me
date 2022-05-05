@@ -3,7 +3,6 @@ layout: post
 title: "Wix ir WordPress konfliktas"
 date: 2021-04-16
 tags: wix, wordpress, opensource
-comments: true
 source:
   name: Twitter
   url: https://twitter.com/narmontase/status/1382954440353800193

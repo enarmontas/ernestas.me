@@ -3,7 +3,6 @@ layout: post
 title: "Polkit Package Update Disrupts Docker Bridge Networking on CentOS 7"
 date: 2022-01-28
 tags: centos polkit redhat cve vulnerability
-comments: true
 summary: |
   Simple polkit pacakage update disrupts Docker bridge networking,
   so Docker service restart is required to bring the networking back.

@@ -3,7 +3,6 @@ layout: post
 title: "On-Call: Leave It Better Than You Found It"
 date: 2021-11-14
 tags: devops helpdesk career
-comments: true
 ---
 During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. 
 They solve any issues that occur 24/7 throughout the infrastructure. 

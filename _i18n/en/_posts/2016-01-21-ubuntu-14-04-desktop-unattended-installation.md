@@ -3,11 +3,6 @@ layout: post
 title: "Ubuntu 14.04 Desktop Unattended Installation"
 date: 2016-01-21
 tags: linux ubuntu automation
-comments: true
-redirect_from:
-  - /ubuntu-1404-desktop-unattended-installation
-  - /2016/01/21/ubuntu-1404-desktop-unattended-installation
-  - /2016/01/21/ubuntu-14.04-desktop-unattended-installation
 ---
 
 ![Ubuntu Installation](/images/2016/ubuntu_1.png)

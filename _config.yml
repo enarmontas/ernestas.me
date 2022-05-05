@@ -51,6 +51,7 @@ defaults:
   - scope:
       path: ""
     values:
+      comments: true
       image: /images/site/terminal-1600-800.jpg
 
 # Analytics

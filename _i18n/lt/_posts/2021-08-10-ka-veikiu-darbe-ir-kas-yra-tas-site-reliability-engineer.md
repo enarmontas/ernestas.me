@@ -3,7 +3,6 @@ layout: post
 title: "Ką veikiu darbe ir kas yra tas Site Reliability Engineer?"
 date: 2021-08-10
 tags: sre, work, vinted
-comments: true
 source: 
   name: LinkedIn
   url: https://www.linkedin.com/posts/enarmontas_kai-draugai-ir-%C5%A1eima-manes-klausia-k%C4%85-veikiu-activity-6830832436704800768-ML_I

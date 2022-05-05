@@ -3,10 +3,7 @@ layout: post
 title: "Storing Terraform State in Consul"
 date: 2021-05-03
 tags: terraform consul
-comments: true
 summary: "HashiCorp products integrate seamlessly with each other, so storing Terraform state in a Consul cluster is very easy."
-redirect_from:
-  - /2021/05/03/storing-terraform-state-in-consul
 ---
 
 I was impressed that Terraform performs better with Consul backend instead of S3/DynamoDB.
