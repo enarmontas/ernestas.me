@@ -29,10 +29,6 @@ include {
 }
 ```
 
-The `find_in_parent_folders()` method searches up the directory tree from the 
-current `terragrunt.hcl` file and returns the absolute path to the first `terragrunt.hcl` in a 
-parent folder. It's a required block in any Terragrunt repository with parent/child structure.
-
 The `find_in_parent_folders()` method traverses the directory tree beginning with the current 
 `terragrunt.hcl` file and returns the absolute path to the first `terragrunt.hcl` in a parent 
 folder. This block is required in any Terragrunt repository with a parent-child structure.
