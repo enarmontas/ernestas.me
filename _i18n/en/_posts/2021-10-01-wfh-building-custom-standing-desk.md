@@ -26,7 +26,7 @@ I have sent it to the manufacturer and received the finished oak desk top after 
 It was cut and sanded, but not fully finished.
 
 ![Desk](/images/2021/10/custom-desk-10.jpg)
-When it came in, I've left it in a dry place for two more weseks. 
+When it came in, I've left it in a dry place for two more weeks. 
 Well, it wasn't a good idea and it got bent really badly. More on that later.
 
 ![Desk](/images/2021/10/custom-desk-11.jpg)
