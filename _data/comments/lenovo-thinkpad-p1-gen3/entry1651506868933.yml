@@ -1,5 +1,5 @@
 _id: 25f9eda0-ca30-11ec-a610-a71b942ade1f
-_parent: 'https://ernestas.me/lenovo-thinkpad-p1-gen3'
+_parent: 'https://interface.lt/lenovo-thinkpad-p1-gen3'
 replying_to_uid: ''
 message: "I use the same machine for work and the compatibility is horrible. (I use Arch) With wayland it kind of works but with X its just a mess. (And I have to use Teams ... so X it is for me)\r\nIf I use the hdmi port I have to switch to dedicated graphics. If I use only the integrated display I have to switch to hybrid graphics.\r\nOtherwise performance is really worse.\r\nSometimes the integrated display just stays black after boot.\r\nGood to here that it seems to be possible to use the machine with linux.\r\nHope it still works for you, I will switch to a Macbook :)"
 name: Daniel
