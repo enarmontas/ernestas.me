@@ -17,7 +17,7 @@ Here's a quick summary:
 
 1. Staticman can be hosted on any platform with NodeJS. I am using free Heroku app, but there are many other options. More details [here](https://staticman.net/docs/index.html).
 2. Jekyll theme will need a simple HTML form that will post comments to Staticman API. I have borrowed most of HTML/CSS/JS from the [guide](https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html) I mentioned earlier.
-3. Staticman will create a [pull request](https://github.com/enarmontas/interface.lt/pull/9) with the comment data. It can also commit directly without approval. Note: GitHub access token is required.
+3. Staticman will create a [pull request](https://github.com/enarmontas/interface/pull/9) with the comment data. It can also commit directly without approval. Note: GitHub access token is required.
 4. You'll approve the comment and merge the pull request.
 5. GitHub Pages (or your custom solution) will build your Jekyll site with the new commit.
 6. Comment will appear on your website.
