@@ -28,8 +28,13 @@
   <!-- RSS -->
   {% feed_meta %}
 
-  <!-- Google Analytics-->
+  <!-- Google Analytics -->
   {% if site.google_analytics and jekyll.environment == 'production' %}
   {% include analytics.html %}
+  {% endif %}
+
+  <!-- Mastodon verification -->
+  {% if site.author.mastodon %}
+  <link rel="me" href="https://{{ site.author.mastodon.server }}/@{{ site.author.mastodon.username }}">
   {% endif %}
 </head>

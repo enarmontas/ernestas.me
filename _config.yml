@@ -11,6 +11,9 @@ author:
   twitter: narmontas
   github: enarmontas
   linkedin: enarmontas
+  mastodon: 
+    server: mstdn.lt
+    username: ernestas
 
 # Settings
 permalink: /:slug
