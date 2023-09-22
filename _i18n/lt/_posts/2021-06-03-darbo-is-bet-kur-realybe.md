@@ -3,9 +3,6 @@ layout: post
 title: "Darbo iš bet kur realybė"
 date: 2021-06-03
 tags: work-from-anywhere, remote-work
-source:
-  name: LinkedIn
-  url: https://www.linkedin.com/posts/enarmontas_nuotolinisdarbas-remotework-activity-6806225173780471808-sCM9
 ---
 
 ![Work from anywhere](/images/2021/work-from-anywhere.jpg)

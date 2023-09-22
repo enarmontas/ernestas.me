@@ -3,9 +3,6 @@ layout: post
 title: "Ką blogo padarė CityBee?"
 date: 2021-02-18
 tags: citybee, security, privacy
-source:
-  name: LinkedIn
-  url: https://www.linkedin.com/pulse/k%C4%85-blogo-padar%C4%97-citybee-ernestas-narmontas--1c/
 ---
 
 ![CityBee](/images/2021/citybee-automobilis.jpg)
