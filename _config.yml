@@ -1,5 +1,5 @@
 # Site
-title: Interface
+title: Ernestas
 description: Blog about computers and stuff
 baseurl: ""
 url: "https://ernestas.me"
@@ -63,7 +63,7 @@ jekyll_analytics:
     id: UA-59118080-2
 
 # Staticman
-staticman_url: https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/interface/master/comments
+staticman_url: https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments
 reCaptcha:
   siteKey: 6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII
   secret: scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=
