@@ -1,5 +1,5 @@
 _id: 1f3332a0-ca31-11ec-a610-a71b942ade1f
-_parent: 'https://interface.lt/on-call-leave-it-better-than-you-found-it'
+_parent: 'https://ernestas.me/on-call-leave-it-better-than-you-found-it'
 replying_to_uid: ''
 message: "> Instead of running a prune command, create a cron job that does it for you on all instances of Docker.\r\n\r\nStuff like this is how you get outages in the first place. Don't do this. Test your changes and go through the usual release cycle instead. Guerrilla bandages create hidden time bombs."
 name: debbie downer

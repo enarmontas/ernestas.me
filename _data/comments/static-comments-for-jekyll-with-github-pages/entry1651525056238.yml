@@ -1,7 +1,7 @@
 _id: 7e7b4d00-ca5a-11ec-a610-a71b942ade1f
-_parent: 'https://interface.lt/static-comments-for-jekyll-with-github-pages'
+_parent: 'https://ernestas.me/static-comments-for-jekyll-with-github-pages'
 replying_to_uid: '3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0'
-message: "Each comment has a permalink with unique ID. When you reply to the comment, the ID is saved to the `replying_to_uid` field, which is then rendered as a reply. You can see an example [here](https://github.com/enarmontas/interface.lt/blob/master/_data/comments/static-comments-for-jekyll-with-github-pages/entry1651525056238.yml). \r\n\r\nHowever, it doesn't support nested replies, that's why I can't reply directly to you now, but I can always use the same thread."
+message: "Each comment has a permalink with unique ID. When you reply to the comment, the ID is saved to the `replying_to_uid` field, which is then rendered as a reply. You can see an example [here](https://github.com/enarmontas/ernestas.me/blob/master/_data/comments/static-comments-for-jekyll-with-github-pages/entry1651525056238.yml). \r\n\r\nHowever, it doesn't support nested replies, that's why I can't reply directly to you now, but I can always use the same thread."
 name: Ernestas
 email: ''
 hp: ''

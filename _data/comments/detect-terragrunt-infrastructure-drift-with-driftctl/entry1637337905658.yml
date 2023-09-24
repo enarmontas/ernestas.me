@@ -1,5 +1,5 @@
 _id: 75b98080-4952-11ec-9249-b3591a899e84
-_parent: 'https://interface.lt/detect-terragrunt-infrastructure-drift-with-driftctl'
+_parent: 'https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl'
 replying_to_uid: 8b3596b0-4902-11ec-ad18-db9a9ded87b0
 message: "No, most of my config includes private stuff, which I can't publish. \r\nHowever, it's almost exactly the same as [this one](https://github.com/gruntwork-io/terragrunt-infrastructure-live-example), \r\nexcept I use Consul as my backend."
 name: Ernestas
