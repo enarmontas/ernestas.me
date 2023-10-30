@@ -3,19 +3,20 @@ layout: post
 title: Užmirštas Juzefo Pilsudskio stadionas Šiaurės miestelyje
 date: 2022-05-25
 description: Test
+tags: urbanreliktai
+year: 1933
+period: Tarpukaris
+place: Šiaurės miestelis, Vilnius
+map: 54.70925,25.29155
+summary: |
+  Vilniaus 1-ojo legionų pėstininkų pulko stadionas, pavadintas maršalo Juzefo Pilsudskio vardu (oficialus pavadinimas lenkų kalba *Stadion 1 pp Legionów im. Józefa Piłsudskiego*), veikęs nuo 1933 metų iki XXI amžiaus pradžios.
 ---
-## Informacija
-Metai: 1933
-Periodas: Tarpukaris
-Vieta: Šiaurės miestelis, Vilnius
-Koordinatės: [54.70925,25.29155](https://goo.gl/maps/jg4YiqUxYMNiUKkNA)
 
-Nesenai visai atsitktinai ieškodamas informacijos apie Šiaurės Miestelio istoriją, aptikau ten buvusio stadiono nuotraukų.
-
-[Vilniaus 1-ojo legionų pėstininkų pulko stadionas](https://pl.wikipedia.org/wiki/Stadion_1_pp_Legion%C3%B3w_w_Wilnie),
+Ieškodamas informacijos apie Šiaurės miestelio istoriją, netikėtai atradau Verkių gatvėje buvusio
+stadiono nuotraukų.
+Pradėjus ieškoti daugiau informacijos Lenkijos archyvuose ir Vikipedijos puslapiuose, paaiškėjo, kad tai [Vilniaus 1-ojo legionų pėstininkų pulko stadionas](https://pl.wikipedia.org/wiki/Stadion_1_pp_Legion%C3%B3w_w_Wilnie),
 pavadintas maršalo [Juzefo Pilsudskio](https://en.wikipedia.org/wiki/J%C3%B3zef_Pi%C5%82sudski)
-vardu (oficialus pavadinimas lenkų kalba *Stadion 1 pp Legionów im. Józefa Piłsudskiego*) -
-daugiafunkcinis stadionas Vilniuje, Šiaurės miestelyje, veikęs nuo 1933 metų iki
+vardu (oficialus pavadinimas lenkų kalba *Stadion 1 pp Legionów im. Józefa Piłsudskiego*), veikęs nuo 1933 metų iki
 XXI amžiaus pradžios.
 
 Stadionas buvo įsikūręs Verkių gatvėje (lenk. *ul. Werkowskiej*),
@@ -29,7 +30,10 @@ WKS 1 ppLeg Wilno ir austrų FC Libertas Wiedeń (3:6).
 Stadione namų rungtynes žaidė [WKS 1 ppLeg Wilno](https://pl.wikipedia.org/wiki/WKS_1_ppLeg_Wilno),
 o vėliau [WKS Śmigły Wilno](https://pl.wikipedia.org/wiki/%C5%9Amig%C5%82y_Wilno).
 
-## Pradžia
+Žemiau, visa stadiono istorija kurią pavyko rasti. Turinys pateikimas skirtingais laikotarpiais:
+Tarpukaris, II-asis pasaulinis karas ir Lietuvos Respublika.
+
+## Tarpukaris
 ### Statybos
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-01.jpg)
 {% include copyright.html
@@ -128,7 +132,7 @@ FC Libertas Wiedeń (3:6).
 %}
 Žiūrovai tribūnoje stebintys atidarymo ceremoniją ir futbolo rungtynes.
 
-## WKS Śmigły Wilno
+### WKS Śmigły Wilno
 Stadione namų rungtynes žaidė 1933 metais įkurtas kariškių sportas klubas
 (lenk. *Wojskowy Klub Sportowy*) [Śmigły Wilno](https://pl.wikipedia.org/wiki/%C5%9Amig%C5%82y_Wilno).
 
@@ -259,12 +263,12 @@ Fotografijoje užfiksuotas KS Cracovia vartininkas Andrzejus Radvanskis (lenk. *
   url='https://commons.wikimedia.org/w/index.php?curid=113213703'
 %}
 
-Skelbimas apie planuojamas rungtynes tarp WKS Śmigły ir KPW Ognisko klubų 1939 birželio 25 dieną.
+Plakatas skelbiantis apie rungtynes tarp WKS Śmigły ir KPW Ognisko klubų 1939 m. birželio 25 d.
 
 ## II-asis pasaulinis karas
 
 1939 m. rugsėjo 1 d. Vokietija užpuolė Lenkiją, o rugsėjo 17 d. tą patį padarė
-ir Sovietų Sąjunga.
+ir Sovietų Sąjunga, užimdama ir Vilniaus kraštą.
 
 Pasibaigus Lenkijos valdymui Vilniaus krašte,
 tuo pačiu baigėsi ir lenkiško futbolo istorija Vilniuje.
@@ -283,6 +287,8 @@ Kiek vėliau, tas pats lėktuvas skrisdamas virš Šeškinės kalvos, vėl pači
 nuotraukos krašte užfiksavo visą Pilsudskio stadioną.
 
 ## Lietuvos Respublika
+Po nepriklausomybės atkūrimo ir Rusijos kariuomenės išvedimo 1993 m., stadionas dar buvo prieinamas visuomenei,
+tačiau buvo apleistas ir galiausiai nugriautas statant dabartinį Šiaurės miestelį.
 
 ### 1995-1999
 
@@ -354,10 +360,10 @@ Vaizdas nuo pietinės stadiono pusės. Kažkur čia buvo stadiono vidurys.
 Taip pat vaizdas nuo pietinės stadiono pusės. Čia stovėjo pietiniai stadiono vartai.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-05.jpg)
-Mobustos daugiabučiai ir verslo centras „Danola“.
+Mobustos daugiabutis ir verslo centras „Danola“.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-06.jpg)
-Mobustos daugiabutis namas Ulonų g. 3.
+Mobustos daugiabučiai namai Ulonų g. 3.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-07.jpg)
 Verslo centras „Danola“.
