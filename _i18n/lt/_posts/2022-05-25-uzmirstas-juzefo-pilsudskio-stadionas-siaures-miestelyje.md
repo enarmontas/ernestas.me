@@ -8,8 +8,9 @@ year: 1933
 period: Tarpukaris
 place: Šiaurės miestelis, Vilnius
 map: 54.70925,25.29155
+comments: false
 summary: |
-  Vilniaus 1-ojo legionų pėstininkų pulko stadionas, pavadintas maršalo Juzefo Pilsudskio vardu (oficialus pavadinimas lenkų kalba *Stadion 1 pp Legionów im. Józefa Piłsudskiego*), veikęs nuo 1933 metų iki XXI amžiaus pradžios.
+  Vilniaus 1-ojo legionų pėstininkų pulko stadionas, pavadintas maršalo Juzefo Pilsudskio vardu, veikęs nuo 1933 metų iki XXI amžiaus pradžios.
 ---
 
 Ieškodamas informacijos apie Šiaurės miestelio istoriją, netikėtai atradau Verkių gatvėje buvusio
@@ -318,7 +319,7 @@ ruošiami pamatai naujiems UAB „Mobusta“ daugiabučiams.
   source='Miestai.net'
   url='https://www.miestai.net/forumas/forum/bendrosios-diskusijos/projektai-ir-statybų-eiga/vilnius/730-šiaurės-miestelis-ir-ogmios-miestas-projektai-ir-statybų-eiga?p=147261#post147261'
 %}
-2006 birželis. „Mobustos“ daugiabučių projektas įgauna formą.
+2006 birželis. „Mobusta“ daugiabučių projektas įgauna formą.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/mobusta-2007-03-17.jpg)
 {% include copyright.html
@@ -326,7 +327,7 @@ ruošiami pamatai naujiems UAB „Mobusta“ daugiabučiams.
   source='Miestai.net'
   url='https://www.miestai.net/forumas/forum/bendrosios-diskusijos/projektai-ir-statybų-eiga/vilnius/730-šiaurės-miestelis-ir-ogmios-miestas-projektai-ir-statybų-eiga?p=224882#post224882'
 %}
-2007 kovas. „Mobustos“ projektas arti pabaigos. Netrukus į naują
+2007 kovas. „Mobusta“ projektas arti pabaigos. Netrukus į naują
 daugiabučių kompleksą įsikels dešimtys šeimų.
 
 ### 2009-2010
@@ -360,10 +361,10 @@ Vaizdas nuo pietinės stadiono pusės. Kažkur čia buvo stadiono vidurys.
 Taip pat vaizdas nuo pietinės stadiono pusės. Čia stovėjo pietiniai stadiono vartai.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-05.jpg)
-Mobustos daugiabutis ir verslo centras „Danola“.
+„Mobusta“ daugiabučiai ir verslo centras „Danola“.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-06.jpg)
-Mobustos daugiabučiai namai Ulonų g. 3.
+„Mobusta“ daugiabučiai namai Ulonų g. 3.
 
 ![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-07.jpg)
 Verslo centras „Danola“.
