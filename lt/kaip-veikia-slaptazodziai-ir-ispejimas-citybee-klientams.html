@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+  
+
+  <title>Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams | Ernestas</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams" />
+<meta name="author" content="Ernestas Narmontas" />
+<meta property="og:locale" content="lt" />
+<meta name="description" content="Blog about computers and stuff" />
+<meta property="og:description" content="Blog about computers and stuff" />
+<link rel="canonical" href="https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams" />
+<meta property="og:url" content="https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams" />
+<meta property="og:site_name" content="Ernestas" />
+<meta property="og:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="twitter:title" content="Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ernestas Narmontas","url":"https://ernestas.me"},"dateModified":"2021-02-16T00:00:00+00:00","datePublished":"2021-02-16T00:00:00+00:00","description":"Blog about computers and stuff","headline":"Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams","image":"https://ernestas.me/images/site/terminal-1600-800.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams"},"url":"https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://ernestas.me/feed.xml" title="Ernestas" />
+
+  <!-- Google Analytics -->
+  
+
+  <!-- Mastodon verification -->
+  
+  <link rel="me" href="https://mstdn.lt/@ernestas">
+  
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59118080-2', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+
+  <body>
+
+    
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/lt/">
+      <h2 class="nav-title">Ernestas</h2>
+    </a>
+    <ul>
+      <li><a href="/lt/">Įrašai</a></li>
+      <li><a href="/lt/apie/">Apie</a></li>
+      <li><a href="/">English 🇬🇧</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    
+    <span>Autorius</span>
+    
+    Ernestas Narmontas
+    
+    
+
+    
+    <br>
+    <time datetime="2021-02-16 00:00:00 +0000">2021-02-16</time>
+    
+  </div>
+
+  <h1 class="post-title">Kaip veikia slaptažodžiai ir įspėjimas CityBee klientams</h1>
+  <div class="post-line"></div>
+
+  <p><img src="/images/2021/citybee-openssl.png" alt="CityBee" /></p>
+
+<p>Vakar paaiškėjo, kad buvo nutekinti CityBee klientų duomenys.
+Juose yra vardai, pavardės, asmens kodai ir el. pašto adresai. Šalia asmens duomenų yra ir slaptažodžių <em>hash’ai</em>.</p>
+
+<p>Straipsnyje paaiškinsiu kas tai yra, kaip veikia slaptažodžiai ir kodėl laikas juos pasikeisti.</p>
+
+<p>Maiša (angl. <em>hash</em>) yra slaptažodžio reprezentacija po apdorojimo vienakrypte kriptografine funkcija.
+Tarkim <code class="language-plaintext highlighter-rouge">slaptazodis1</code> apdorojus vienakrypte funkcija naudojant SHA1 algoritmą tampa <em>hash’u</em> <code class="language-plaintext highlighter-rouge">b60eb503798153ea0d43c701d7a9e0c9ead739af</code>.
+Paėmus šitą <em>hash’ą</em> su juo nelabai ką galime padaryti, nėra algoritmo galinčio pasakyti koks slaptažodis slepiasi po juo, nes jis buvo sukurtas vienakrypte funkcija.
+Nėra būdo atgaline kryptimi jo iššifruoti.</p>
+
+<p>Kai jungdamiesi prie sistemos naudojate slaptažodį, jis yra apdorojamas vienakrypte funkcija ir validavimui naudojamas <em>hash’as</em>.
+Jeigu jis sutampa, jūs prisijungiate prie sistemos. Svarbu suprasti, kad visą laiką tas pats žodis turi tą patį <em>hash’ą</em>.</p>
+
+<p>Blogoji žinia ta, kad įprasti žodžiai ir jų kombinacijos jau yra viešose duomenų bazėse. Galima atlikti paiešką ir surasti koks žodis slepiasi po <em>hash’u</em>.</p>
+
+<p>Tarkim jei <a href="hashtoolkit.com">hashtoolkit.com</a> įvesiu <a href="https://hashtoolkit.com/decrypt-hash/?hash=b60eb503798153ea0d43c701d7a9e0c9ead739af"><code class="language-plaintext highlighter-rouge">b60eb503798153ea0d43c701d7a9e0c9ead739af</code></a> man parodys jo reikšmę <code class="language-plaintext highlighter-rouge">slaptazodis1</code>. Taip yra ne todėl, kad būtų kažkoks algoritmas, galintis iššifruoti, bet tiesiog kažkas jau įkėlė tą žodį ir jo <em>hash</em> reprezentaciją.</p>
+
+<p>Šiai problemai spręsti inžinieriai naudoja <em>salting</em> (sūdymas?). <em>Salt’as</em> yra tam tikras simbolių derinys pridedamas prie jūsų slaptažodžio.
+Tarkim, jei jūsų slaptažodis yra <code class="language-plaintext highlighter-rouge">grazusoras</code>, o sistemos pridedamas <em>salt’as</em> yra <code class="language-plaintext highlighter-rouge">j5IcQ3kiQd</code>, galutinis slaptažodis gaunasi <code class="language-plaintext highlighter-rouge">grazusorasj5IcQ3kiQd</code>.
+Tokio derinio SHA1 <em>hash</em> reprezentacija yra <code class="language-plaintext highlighter-rouge">ade4817c9fd16f3a3761dac54c6793e283c50181</code>.</p>
+
+<p>Kai jungiatės prie sistemos, jūs žinote slaptažodį, sistema žino <em>salt’ą</em>.
+Jų kombinacija paverčiama <em>hash’u</em> ir taip prisijungiate prie sistemos.
+Privalumas yra tas, kad net nutekinus duomenis su jais nieko nebūtų galima padaryti, nes nežinoma antra dalis (jūsų slaptažodis).
+Viešos duomenų bazės taip pat nieko nerastų, nebent didžiulio atsitiktinumo dėka.
+Pabandymui, galima paieškoti
+<a href="https://hashtoolkit.com/decrypt-hash/?hash=ade4817c9fd16f3a3761dac54c6793e283c50181"><code class="language-plaintext highlighter-rouge">ade4817c9fd16f3a3761dac54c6793e283c50181</code></a> - jokių rezultatų nėra.
+Nors <em>salt’as</em> nėra galutinė slaptažodžių saugumo priemonė, tai tik visiškas minimumas apsunkinantis slaptažodžių “iššifravimą”.</p>
+
+<p>Blogiausia dalis.</p>
+
+<p>CityBee sistemos nenaudojo <em>salt’ų</em>. Visi <em>hash’ai</em> esantys nutekintoje duomenų bazėje (pasak forumo narių kuriame įkelta) yra tiesiog vartotojų slaptažodžių reprezentacija.
+Jei slaptažodžio <em>hash</em> jau yra viešoje duomenų bazėje, labai lengva rasti jo reikšmę.</p>
+
+<p>Mano patarimas?</p>
+
+<p>Bėkit keisti slaptažodžių jeigu naudojote tokius kaip
+<code class="language-plaintext highlighter-rouge">labadiena</code> (SHA1: <a href="https://hashtoolkit.com/decrypt-hash/?hash=1a33b6316d7b17c32ea65c0495f467e32e6e1423"><code class="language-plaintext highlighter-rouge">1a33b6316d7b17c32ea65c0495f467e32e6e1423</code></a>),
+<code class="language-plaintext highlighter-rouge">jonas1990</code> (SHA1: <a href="https://hashtoolkit.com/decrypt-hash/?hash=26f95bd2f5ff00d1edef8b023cbd94a854ec0a9c"><code class="language-plaintext highlighter-rouge">26f95bd2f5ff00d1edef8b023cbd94a854ec0a9c</code></a>) ir pan.</p>
+
+<p>Keiskit ne tik CityBee, bet ir Facebook ar LinkedIn. Visur kur naudojate tą patį el. paštą ir slaptažodį. O tikriausiai naudojate.</p>
+
+<p>Šitas CityBee atvejis parodo kaip svarbu yra turėti unikalų ir iš skirtingų raidžių, skaičių bei simbolių sudarytą slaptažodį.</p>
+
+
+</div>
+
+
+
+
+<section class="comments" id="comment-section">
+  <hr>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments">
+  <input type="hidden" name="options[origin]" value="https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams">
+  <input type="hidden" name="options[parent]" value="https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Rašyti komentarą<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ernestas.me/lt/kaip-veikia-slaptazodziai-ir-ispejimas-citybee-klientams#respond" style="display:none;">&nbsp;(atšaukti atsakymą)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Komentaras" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Vardas
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Vardas (privalomas)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">El. paštas
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="El. pašto adresas (neprivalomas)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII"></div>
+
+    <button class="button" id="comment-form-submit">
+      Publikuoti
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Uždaryti</button>
+  </div>
+</article>
+
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascript/static-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
+<div class="pagination">
+  
+  <a href="/lt/ka-blogo-padare-citybee" class="left arrow">&#8592;</a>
+  
+  
+  <a href="/lt/kodel-parsisiusi-ingress-jo-nekesi-bet-kasdien-zaisi" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-10-31 22:08:46 +0000">2023</time> Ernestas Narmontas. Sukasi ant <a href="https://jekyllrb.com/">Jekyll</a> naudojant
+<a href="https://github.com/chesterhow/tale/">Tale</a> temą.
+
+  </span>
+</footer>
+
+  </body>
+</html>
