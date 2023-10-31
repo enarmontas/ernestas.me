@@ -35,7 +35,7 @@ Tarpukaris, II-asis pasaulinis karas ir Lietuvos Respublika.
 
 ## Tarpukaris
 ### Statybos
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-01.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-01.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -50,7 +50,7 @@ miestelio pastatų.
 ### Stadiono atidarymas
 Stadionas oficialiai atidarytas 1933 metų rugpjūčio 6 dieną.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-02.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-02.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   source='Foto Polska'
@@ -62,7 +62,7 @@ Verkių gatvėje.
 Toks jausmas, kad fotografas specialiai nukreipė fotoaparatą kiek žemiau,
 kad į kadrą nepatektų likusi karinio miestelio teritorija.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-03.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-03.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   source='Foto Polska'
@@ -71,7 +71,7 @@ kad į kadrą nepatektų likusi karinio miestelio teritorija.
 Stadionas atidarymo metu iš pietinės pusės.
 Kairėje pusėje matosi Verkių gatvė, dešinėje prasideda karinio miestelio pastatai.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-04.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-04.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -83,7 +83,7 @@ Verkių gatvės pusės.
 Spygliuota tvora juosė visą karinio miestelio teritoriją,
 kuriame buvo ir Pilsudskio vardo stadionas.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-06.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-06.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -100,7 +100,7 @@ Dešinėje matosi atidarymo renginio fotografai prie savo darbo įrangos.
 Fotografijos viršutinėje dešinėje dalyje esantis pastatas vėliau buvo
 praplėstas ir yra išlikęs iki šių dienų adresu [Žygio g. 88](https://goo.gl/maps/aeuQGbQJtWB2y67X6).
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-07.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-07.jpg)
 {% include copyright.html
   author='Jarosław Nieciecki, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -110,7 +110,7 @@ praplėstas ir yra išlikęs iki šių dienų adresu [Žygio g. 88](https://goo.
 Stadiono atidarymo ceremonija. Juostelę perkirpo dvi maršalo Pilsudskio dukterys
 Vanda (lenk. *Wanda Piłsudska*) ir Jadvyga (lenk. *Jadwiga Piłsudska*).
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-08.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-08.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -123,7 +123,7 @@ Stadiono atidarymo metu 1933 rugpjūčio 6 d. vyko varžybos tarp Vilniaus 1-ojo
 legionų pėstininkų pulko komandos WKS 1 ppLeg Wilno ir austrų
 FC Libertas Wiedeń (3:6).
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-05.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/stadion-sportowy-im-marszalka-jozefa-pilsudskiego-05.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -154,7 +154,7 @@ prasidėjęs II-asis pasaulinis karas nutraukė klubo veiklą.
 
 ### 1934
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-01.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-01.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -163,7 +163,7 @@ prasidėjęs II-asis pasaulinis karas nutraukė klubo veiklą.
 %}
 1934 metai. WKS Śmigły Wilno komanda stadiono aikštėje. Fone matomas karinis miestelis.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/mecz-artysci-filmowi-prasa-w-wilnie-01.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/mecz-artysci-filmowi-prasa-w-wilnie-01.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -172,7 +172,7 @@ prasidėjęs II-asis pasaulinis karas nutraukė klubo veiklą.
 %}
 1934 metai. Rungtynės tarp kino menininkų ir spaudos darbuotojų. Bendra komandų nuotrauka.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-03.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-03.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -187,7 +187,7 @@ komandos įteiktą laivo maketą.
 
 ### 1936
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-02.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-02.jpg)
 {% include copyright.html
   author='Jarosław Nieciecki, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -196,7 +196,7 @@ komandos įteiktą laivo maketą.
 %}
 1936 metai. WKS Śmigły Wilno klubo futbolininkai prie pietinių stadiono vartų.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/wilno-liga-1936-01.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/wilno-liga-1936-01.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -206,7 +206,7 @@ komandos įteiktą laivo maketą.
 1936 metų gegužės 24 diena. Wilno - Liga A (2:1) rungtynės.
 Lygos komandos žaidėjų nuotrauka pietinėje stadiono pusėje.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/wilno-liga-1936-02.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/wilno-liga-1936-02.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -221,7 +221,7 @@ Kairiau esantis pastatas yra išlikęs iki šių dienų adresu
 
 ### 1938
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-04.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-04.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -232,7 +232,7 @@ Kairiau esantis pastatas yra išlikęs iki šių dienų adresu
 Vilniaus komandos žaidėjas Jozefas Hajdulas (lenk. *Józef Hajdul*) įmuša įvartį
 į Warszawianka vartus, kuriuos saugo Lucjanas Rudnickis (lenk. *Lucjan Rudnicki*).
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-05.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-05.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -243,7 +243,7 @@ Vilniaus komandos žaidėjas Jozefas Hajdulas (lenk. *Józef Hajdul*) įmuša į
 Veiksmas prie Cracovia komandos vartų, kuriuos saugo vartininkas
 Andrzejus Radvanskis (lenk. *Andrzej Radwański*).
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-06.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-06.jpg)
 {% include copyright.html
   author='Brak Danych, Narodowe Archiwum Cyfrowe'
   license='CC BY-SA 4.0'
@@ -255,7 +255,7 @@ Fotografijoje užfiksuotas KS Cracovia vartininkas Andrzejus Radvanskis (lenk. *
 
 ### 1939
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/smigly-wilno-ognisko.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/smigly-wilno-ognisko.jpg)
 {% include copyright.html
   author='Brak Danych, Polona Digital Library'
   license='CC BY-SA 4.0'
@@ -275,13 +275,13 @@ tuo pačiu baigėsi ir lenkiško futbolo istorija Vilniuje.
 
 ### 1944
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1944-07-09-10.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1944-07-09-10.jpg)
 
 1944-07-09 18.40 val. vokiečių žvalgybinis lėktuvas,
 skrisdamas virš Vilniaus centro, 10 numeriu pažymėtos aerofotografijos krašte,
 užfiksavo ir dalį karinio miestelio su stadionu.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1944-07-09-46.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1944-07-09-46.jpg)
 
 Kiek vėliau, tas pats lėktuvas skrisdamas virš Šeškinės kalvos, vėl pačiame
 nuotraukos krašte užfiksavo visą Pilsudskio stadioną.
@@ -292,7 +292,7 @@ tačiau buvo apleistas ir galiausiai nugriautas statant dabartinį Šiaurės mie
 
 ### 1995-1999
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1995-1999.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-1995-1999.jpg)
 
 [Geoportal](https://www.geoportal.lt/map) žemėlapio duomenimis,
 palydovinė fotografija daryta tarp 1995-1999.
@@ -301,7 +301,7 @@ Tai yra vėliausia stadiono fotografija kurią pavyko rasti.
 
 ### 2005-2006
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2005-2006.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2005-2006.jpg)
 
 2005-2006 metais darytoje fotografijoje stadiono jau nebėra, buvo nugriautas
 kažkada tarp 2000-2005.
@@ -312,7 +312,7 @@ ruošiami pamatai naujiems UAB „Mobusta“ daugiabučiams.
 
 ### 2006-2007
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/mobusta-2006-06-29.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/mobusta-2006-06-29.jpg)
 {% include copyright.html
   author='Miestai.net vartotojas Mantas'
   source='Miestai.net'
@@ -320,7 +320,7 @@ ruošiami pamatai naujiems UAB „Mobusta“ daugiabučiams.
 %}
 2006 birželis. „Mobustos“ daugiabučių projektas įgauna formą.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/mobusta-2007-03-17.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/mobusta-2007-03-17.jpg)
 {% include copyright.html
   author='Miestai.net vartotojas Deep\'as'
   source='Miestai.net'
@@ -331,14 +331,14 @@ daugiabučių kompleksą įsikels dešimtys šeimų.
 
 ### 2009-2010
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2009-2010.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2009-2010.jpg)
 
 2009-2010 metais stadiono vietoje jau pilnai užbaigtas UAB „Mobusta“ daugiabučių
 projektas, šalia matosi ir naujas Valstybinės mokesčių inspekcijos pastatas.
 
 ### 2018-2020
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2018-2020.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2018-2020.jpg)
 
 Naujausia palydovinė fotografija, kurioje matomas mums įprastas vaizdas.
 
@@ -346,33 +346,33 @@ Naujausia palydovinė fotografija, kurioje matomas mums įprastas vaizdas.
 Galiausiai ir pats apsilankiau stadiono vietoje. Eidamas pro šią vietą niekada nesusimasčiau,
 kad čia kažkada buvo stadionas.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-01.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-01.jpg)
 Namas Verkių g. 25A, pastatytas kažkada sovietmečiu. Jo vietoje buvo bilietų kasos ir įėjimas į
 stadioną iš miesto. Taip pat šioje pusėje stovėjo ir žiūrovų tribūnos.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-02.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-02.jpg)
 Verslo centras „North Star“, kuriame yra įsikurusi ir Valstybinė mokesčių inspekcija.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-03.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-03.jpg)
 Vaizdas nuo pietinės stadiono pusės. Kažkur čia buvo stadiono vidurys.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-04.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-04.jpg)
 Taip pat vaizdas nuo pietinės stadiono pusės. Čia stovėjo pietiniai stadiono vartai.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-05.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-05.jpg)
 Mobustos daugiabutis ir verslo centras „Danola“.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-06.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-06.jpg)
 Mobustos daugiabučiai namai Ulonų g. 3.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-07.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-07.jpg)
 Verslo centras „Danola“.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-08.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-08.jpg)
 Stiklinis fasadas už kurio matosi erdvi laiptinė.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-09.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-09.jpg)
 Gerai įsižiūrėjus matosi ir atsispindintis fabrikas „Sigma“, esantis Kalvarijų gatvėje.
 
-![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2023/09/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-10.jpg)
+![](https://urbanreliktai.s3.eu-central-1.amazonaws.com/2022/05/pilsudskio-stadionas/pilsudskio-stadiono-vieta-2022-10.jpg)
 Dar atspindžių nuo namo esančio Verkių gatvėje.
