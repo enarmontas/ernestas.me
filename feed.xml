@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://ernestas.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ernestas.me/" rel="alternate" type="text/html" hreflang="en" /><updated>2024-05-22T06:56:49+00:00</updated><id>https://ernestas.me/feed.xml</id><title type="html">Ernestas</title><subtitle>Blog about computers and stuff</subtitle><author><name>Ernestas Narmontas</name></author><entry><title type="html">Common Configurations with Terragrunt</title><link href="https://ernestas.me/common-configurations-with-terragrunt" rel="alternate" type="text/html" title="Common Configurations with Terragrunt" /><published>2022-06-13T00:00:00+00:00</published><updated>2022-06-13T00:00:00+00:00</updated><id>https://ernestas.me/common-configurations-with-terragrunt</id><content type="html" xml:base="https://ernestas.me/common-configurations-with-terragrunt"><![CDATA[<p>Terragrunt supports multiple included files, which is a great way to have common configurations 
+with module definitions and default values included in any child configurations. 
+Here is a short explanation of how it works.</p>
+
+<h2 id="example">Example</h2>
+<p>Usually, when I write a Terragrunt module, I define the following blocks:</p>
+
+<p>First, I define a Terraform block with a module source.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform {
+  source = "git::git@github.com:example/modules.git//aws/vpc?ref=v0.10.0"
+}
+</code></pre></div></div>
+
+<p>Then, I define a Terragrunt block to include the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file with backend, provider,
+and other configurations across all of my environments and accounts.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include {
+  path = find_in_parent_folders()
+}
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code> method traverses the directory tree beginning with the current 
+<code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file and returns the absolute path to the first <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> in a parent 
+folder. This block is required in any Terragrunt repository with a parent-child structure.</p>
+
+<p>Finally, I can define the <code class="language-plaintext highlighter-rouge">inputs</code> block to pass all the required values to the module:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputs = {
+  name  = "example-vpc"
+  other = "example-value"
+  ...
+}
+</code></pre></div></div>
+
+<p>Here is the resulting child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform {
+  source = "git::git@github.com:example/modules.git//aws/vpc?ref=v0.10.0"
+}
+
+include {
+  path = find_in_parent_folders()
+}
+
+inputs = {
+  name  = "example-vpc"
+  other = "example-value"
+  ...
+}
+</code></pre></div></div>
+
+<h2 id="problem">Problem</h2>
+<p>Let’s say I need to define 10 configurations with the same module. 
+By using the same static config, I’ll end up repeating the same Terraform source with locked module 
+versions and most of the inputs.</p>
+
+<p>In order to write less code and have more dynamic definitions, 
+I can define a common configuration for the same module and then include it in the 
+child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>. Here is an example:</p>
+
+<p>Let’s create a file <code class="language-plaintext highlighter-rouge">example-module.hcl</code> in the <code class="language-plaintext highlighter-rouge">common</code> folder:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
+  module_url     = "git::git@github.com:example/modules.git//aws/vpc"
+  module_version = "v0.10.0"
+}
+
+terraform {
+  source = "${local.module_url}?ref=${local.module_version}"
+}
+
+inputs = {
+  other = "example-value"
+}
+</code></pre></div></div>
+
+<p>Now the child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configurations can include this file in order to have the same 
+module definition and same inputs across all environments and accounts with the ability to 
+override them in the child configurations.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>Let’s add everything together in a new <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> child configuration file.</p>
+
+<p>First, define the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> include block and give it a name:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "root" {
+  path = find_in_parent_folders()
+}
+</code></pre></div></div>
+
+<p>Then, include the common module config:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "module" {
+  path = "${get_path_to_repo_root()}/common/modules/example-module.hcl"
+}
+</code></pre></div></div>
+
+<p>Finally, define inputs that are unique for the specific resource:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputs = {
+  name = "example-vpc"
+}
+</code></pre></div></div>
+
+<p>Here is the resulting child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configuration with a dynamically included module:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "root" {
+  path = find_in_parent_folders()
+}
+
+include "module" {
+  path = "${get_path_to_repo_root()}/common/modules/example-module.hcl"
+}
+
+inputs = {
+  name = "example-vpc"
+}
+</code></pre></div></div>
+
+<p>During the Terragrunt run, the common module configuration will be merged with 
+the child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configuration, merging all blocks and inputs into one configuration. 
+It works with Terragrunt out of the box, and it also works with the
+<a href="https://github.com/transcend-io/terragrunt-atlantis-config">Terragrunt config generator</a> if you 
+use <a href="https://github.com/runatlantis/atlantis">Atlantis</a> for your CI/CD pipelines.</p>
+
+<p>Now, when you want to bump the <code class="language-plaintext highlighter-rouge">example-module</code> version, you only need to do it once in 
+the <code class="language-plaintext highlighter-rouge">common/example-module.hcl</code> file and all the child configurations will pick up the change 
+during subsequent Terragrunt runs.
+Plus, if you want to override some common input value or module source, 
+just do it in the child configuration and it will take precedence over the included one.</p>
+
+<p>You can see a similar example of the same pattern in the official 
+<a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example/tree/master/_envcommon">Terragrunt live infrastructure example repo</a>.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="terraform" /><category term="terragrunt" /><summary type="html"><![CDATA[Terragrunt supports multiple included files, which is a great way to have common configurations with module definitions and default values included in any child configurations. Here is a short explanation of how it works.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Polkit Package Update Disrupts Docker Bridge Networking on CentOS 7</title><link href="https://ernestas.me/polkit-package-update-on-centos-7" rel="alternate" type="text/html" title="Polkit Package Update Disrupts Docker Bridge Networking on CentOS 7" /><published>2022-01-28T00:00:00+00:00</published><updated>2022-01-28T00:00:00+00:00</updated><id>https://ernestas.me/polkit-package-update-on-centos-7</id><content type="html" xml:base="https://ernestas.me/polkit-package-update-on-centos-7"><![CDATA[<p>Warning to anyone who is preparing for <code class="language-plaintext highlighter-rouge">polkit</code> upgrade due to
+<a href="https://access.redhat.com/security/vulnerabilities/RHSB-2022-001">CVE-2021-4034</a> vulnerability!</p>
+
+<p>Simple <code class="language-plaintext highlighter-rouge">polkit</code> package update from <code class="language-plaintext highlighter-rouge">0.112-26.el7</code> to <code class="language-plaintext highlighter-rouge">0.112-26.el7_9.1</code> disrupts Docker bridge networking,
+so Docker service restart is required to bring the networking back.
+Service restart also restarts the containers, so expect some downtime.</p>
+
+<p>Today I learned it the hard way. I planned to run <code class="language-plaintext highlighter-rouge">yum update -y polkit</code> on hundreds of servers,
+because I didn’t see any issues when I tested on select batch of servers before.</p>
+
+<p>Well, I got lucky that I decided to double check on one more server, which also had the Docker service.</p>
+
+<p>I ran the update and immediately received an alert about the app being down.
+After some troubleshooting we found a <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1435791">registered bug</a>,
+which was actually closed because maintainers were unable to reproduce.</p>
+
+<p>Here are the system versions:</p>
+<ul>
+  <li>Docker: <code class="language-plaintext highlighter-rouge">19.03.15</code></li>
+  <li>CentOS: <code class="language-plaintext highlighter-rouge">7.8.2003</code></li>
+  <li>Kernel: <code class="language-plaintext highlighter-rouge">3.10.0-1127.el7.x86_64</code></li>
+</ul>
+
+<p>I hope this helps!</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="centos" /><category term="polkit" /><category term="redhat" /><category term="cve" /><category term="vulnerability" /><summary type="html"><![CDATA[Warning to anyone who is preparing for polkit upgrade due to CVE-2021-4034 vulnerability!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Lenovo ThinkPad P1 Gen3 Review (with Linux)</title><link href="https://ernestas.me/lenovo-thinkpad-p1-gen3" rel="alternate" type="text/html" title="Lenovo ThinkPad P1 Gen3 Review (with Linux)" /><published>2021-12-04T00:00:00+00:00</published><updated>2021-12-04T00:00:00+00:00</updated><id>https://ernestas.me/lenovo-thinkpad-p1-gen3</id><content type="html" xml:base="https://ernestas.me/lenovo-thinkpad-p1-gen3"><![CDATA[<p>I’ve used Linux for many years on servers, but still kept macOS as my main working environment for almost ten years now. A few months ago, I gave up on macOS and started using Fedora as my main operating system on the ThinkPad P1 Gen3 15”.</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-9.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>I’ve <a href="https://www.reddit.com/r/linuxmasterrace/comments/r2jxrj/finally_ive_made_the_switch_from_macos_to_fedora/">posted this image</a> to Reddit <em>r/linuxmasterrace</em> and redditors had a lot of questions about the experience with this device, so I decided to share it here.</p>
+
+<h3 id="specs">Specs</h3>
+<p>Display: 15.6” FHD (1920 x 1080) IPS Dolby Vision HDR<br />
+GPU: Integrated Intel UHD Graphics<br />
+CPU: Intel Core i9-10885H (2.40 GHz, 8 Cores, 16 Threads, 16 MB Cache)<br />
+Memory: 64 GB DDR4 2933MHz (2 x 32 GB)<br />
+Storage: Toshiba XG6 1 TB PCIe SSD<br />
+Operating System: Fedora Workstation 35</p>
+
+<h3 id="my-key-takeaways">My Key Takeaways</h3>
+<p>Color meanings: green - good, yellow - mixed feelings, red - bad.</p>
+
+<p>🟡 Design. The ThinkPad P1 is a really beautiful looking device with a high build quality. It’s functional and minimal looking at the same time.</p>
+
+<p>Chassis is made from carbon fiber and magnesium, which makes it really light and comfortable to work with.</p>
+
+<p>However, it’s a fingerprint magnet. Every single touch on the laptop will leave a visible fingerprint.</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-2.jpg" alt="ThinkPad P1 Gen3" />
+<img src="/images/2021/12/thinkpad-p1-gen3-3.jpg" alt="ThinkPad P1 Gen3" />
+<img src="/images/2021/12/thinkpad-p1-gen3-4.jpg" alt="ThinkPad P1 Gen3" />
+<img src="/images/2021/12/thinkpad-p1-gen3-8.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Keyboard is back-lit, responsive and pleasant to type with. It’s a really well designed keyboard, which gives an amazing typing experience with enough travel and a firm feel.</p>
+
+<p>I don’t like that it doesn’t have the media control buttons, but I’ve mapped the F12 button as my play/pause button. Also, the Fn key is located in the very left corner, but the functionality can be swapped in the Lenovo firmware settings so it becomes the Ctrl key.</p>
+
+<p>Other than that, I don’t have any issues with the keyboard.
+Lenovo is well known for their world-class keyboards and this one is not an exception.</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-6.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🔴 TrackPad is terrible. I don’t know how Lenovo never managed to actually innovate and create a decent touch-pad. For me, the experience is just awful: gestures are not working, dragging stuff is almost impossible, accuracy is very low. I am not overstating it. ThinkPad users who switched from MacBooks can also <a href="https://www.reddit.com/r/thinkpad/comments/snvby7/after_5_years_with_a_macbook_switched_to_a/">confirm that</a>. I only got used to the TrackPad after 3 months of usage.</p>
+
+<p>Lenovo is famous for their TrackPoint (that little red thing on the keyboard), but I am not sure if I’ll take the time to learn using it. Some say it’s far more precise and comfortable as you don’t have to lift your fingers from the keyboard. I might give it a shot sometime.</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-7.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Fingerprint reader. I didn’t expect it to work, but it did! It’s not as accurate as the one on the MacBook, but it’s pretty much close. It was harder to register my finger, but when I did, the experience was flawless.</p>
+
+<p>I use it to unlock the laptop, confirm elevated permission prompts, unlock third party apps like 1Password and even authenticate <code class="language-plaintext highlighter-rouge">sudo</code> commands in the Terminal.</p>
+
+<p>🟡 Webcam is not great, not terrible. The 720p camera produces a good enough image during my meetings.</p>
+
+<p>I really like that the camera features a built-in ThinkShutter webcam privacy shutter. No more stickers, that can actually <a href="https://www.businessinsider.com/apple-macbook-pro-screen-break-closed-with-laptop-camera-cover-2020-7?op=1">break your screen</a>.</p>
+
+<p>🟡 Speakers. A custom designed Dolby Atmos speaker system sounds good, but it’s still not as good as I would expect it to be. It’s good for work, but not for listening to music or gaming.</p>
+
+<p>🟢 80 Wh battery is rated at 15 hours, but it lasts a bit less during normal usage. Anyway, the battery life is still great for such a powerful workstation:</p>
+<ul>
+  <li>7-9 hours of typing, browsing and some programming.</li>
+  <li>3-4 hours of video/audio conferencing or other CPU intensive tasks.</li>
+</ul>
+
+<p>🟢 Performance is exceptional. With specs like that, I could not expect anything else.</p>
+
+<p>During a really heavy load, thermal throttling limits performance, but nothing substantial. I am not really doing a lot of multi-threaded workloads, so I rarely even hear a loud fan noise during normal day-to-day usage. I don’t remember ever experiencing any lag with this machine.</p>
+
+<p>I think this is the strongest part of this laptop.</p>
+
+<p>🟢 GPU. ThinkPad P1 supports Nvidia Quadro T1000 and T2000 4GB Max-Q cards, as well as integrated Intel UHD Graphics.</p>
+
+<p>I opted for the integrated Intel UHD Graphics due to <a href="https://itsfoss.com/fix-ubuntu-freezing">well known issues with Nvidia</a>, which gives me a simple device without the need to deal with video drivers. On top of that, I am not planning to run anything more GPU intensive than Factorio.</p>
+
+<p>Overall, I like how the Intel UHD Graphics performs. I didn’t feel any lag with an external monitor connected via the USB-C port.</p>
+
+<p><img src="/images/2021/10/home-office-6.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Display is configurable from the base version 15.6” FHD (1920 x 1080) IPS up to 15.6” 4K (3840 x 2160) OLED with Dolby Vision HDR.</p>
+
+<p>I had to choose the 15.6” FHD (1920x1080) Dolby Vision HDR screen, because 4K options are not supported on the integrated GPU. It’s a HDR400 WVA IPS display panel with 16:9 aspect ratio, 800:1 contrast ratio and 72% NTSC color gamut.</p>
+
+<p>I guess it’s a decent display that does the job for me, as someone who works with an external display most of the time.</p>
+
+<p><img src="/images/2021/10/home-office-5.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Connectivity options are very extensive:</p>
+<ul>
+  <li>2 x USB A 3.2 Gen 1</li>
+  <li>2 x USB Type-C Thunderbolt 3</li>
+  <li>1 x HDMI 2.0</li>
+  <li>1 x mic / headphone combo jack</li>
+  <li>SD card reader.</li>
+</ul>
+
+<p>What else would you need?</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-5.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Expandable. If you still need better specs, no problem. Open the laptop and install new parts. No soldered memory or storage devices. <a href="/function-over-form-mounting-external-ssd-on-macbook">Not like the competition</a>.</p>
+
+<p><img src="/images/2021/12/thinkpad-p1-gen3-1.jpg" alt="ThinkPad P1 Gen3" /></p>
+
+<p>🟢 Linux support. Good support for Linux out of the box. I only had to install some video/audio codecs so HTML5 video would play on Firefox.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>Lenovo ThinkPad P1 Gen3 is a well built mobile workstation, which runs absolutely great with Linux. It’s a perfect choice for engineers who need enough computing power and a comfortable typing experience. The only major downside for me is the touch-pad.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="wfh" /><category term="workplace" /><category term="remote-work" /><summary type="html"><![CDATA[I’ve used Linux for many years on servers, but still kept macOS as my main working environment for almost ten years now. A few months ago, I gave up on macOS and started using Fedora as my main operating system on the ThinkPad P1 Gen3 15”.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/2021/10/home-office-5.jpg" /><media:content medium="image" url="https://ernestas.me/images/2021/10/home-office-5.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Detect Terragrunt Infrastructure Drift With Driftctl</title><link href="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl" rel="alternate" type="text/html" title="Detect Terragrunt Infrastructure Drift With Driftctl" /><published>2021-11-17T00:00:00+00:00</published><updated>2021-11-17T00:00:00+00:00</updated><id>https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl</id><content type="html" xml:base="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl"><![CDATA[<p><a href="https://github.com/cloudskiff/driftctl">Driftctl</a> is a tool that helps detect infrastructure
+drift by comparing Terraform state with live resources.
+It returns a list of resources not covered by infrastructure as code (IaC) codebase.</p>
+
+<p>Since <a href="https://terragrunt.gruntwork.io/">Terragrunt</a> is using standard Terraform state files,
+driftctl works with Terragrunt by using the glob pattern passed to the <code class="language-plaintext highlighter-rouge">--from</code> option.</p>
+
+<p>However, their <a href="https://driftctl.com/how-to-use-driftctl-with-terragrunt/">official guide</a>
+did not match my needs as I am using different folder structure with region names in the path,
+similar to Terragrunt
+<a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example">recommended structure</a>.</p>
+
+<p>In this article I will document my workflow to detect Terragrunt infrastructure drift using
+driftctl.</p>
+
+<h3 id="terragrunt-structure">Terragrunt Structure</h3>
+<p>My Terragrunt structure uses the following format:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>account                 &lt;- production, testing
+ └ project              &lt;- project-1, project-2
+    └ region            &lt;- global, eu-west-1
+       └ module         &lt;- s3-bucket, iam-user
+          └ resource    &lt;- example-bucket-1, example-user-1
+</code></pre></div></div>
+
+<p>It translates to something like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>production
+    project-1
+        eu-west-1
+            s3-bucket
+                example-bucket-1
+                    terragrunt.hcl
+                example-bucket-2
+                    terragrunt.hcl
+                example-bucket-3
+                    terragrunt.hcl
+        global
+            iam-assumable-role
+                example-role-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+    project-2
+        eu-west-1
+            sns-topic
+                example-sns-topic-1
+                    terragrunt.hcl
+        global
+            iam-group-with-policies
+                example-group-with-policies-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+                example-user-2
+                    terragrunt.hcl
+testing
+    project-3
+        eu-west-1
+            s3-bucket
+                example-bucket-1
+                    terragrunt.hcl
+        global
+            iam-assumable-role
+                example-role-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+</code></pre></div></div>
+
+<h3 id="pull-terragrunt-state">Pull Terragrunt State</h3>
+<p>During runtime driftctl is not running any of the Terragrunt commands,
+so I would need to pass additional parameters to driftctl for authentication to my backend.</p>
+
+<p>Since I am using <a href="/storing-terraform-state-in-consul">Consul backend</a> and my configuration is
+defined in the Terragrunt code, I will run <code class="language-plaintext highlighter-rouge">terragrunt state pull</code> on each of my modules.
+It will automatically generate Terraform backend config and pull the state to a local folder.
+Then, I will pass my local state files using glob pattern to <code class="language-plaintext highlighter-rouge">driftctl scan</code> command.</p>
+
+<p>Here is the process.</p>
+
+<p>Go to the target AWS account in your Terragrunt repository:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd &lt;terragrunt&gt;/&lt;account&gt;
+</code></pre></div></div>
+
+<p>Find all account modules by searching for <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MODULES=$(find . -name "terragrunt.hcl" -exec dirname {} \; | grep -v ".terragrunt-cache" | sed 's/\.\///g' | grep '/')
+</code></pre></div></div>
+
+<p>Pull the Terraform state for each Terragrunt module to a separate <code class="language-plaintext highlighter-rouge">states</code> folder,
+while maintaining the same module structure:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $MODULES | \
+  while read module; do \
+    echo "Pulling state for $module"; \
+    mkdir -p states/$module; \
+    terragrunt state pull --terragrunt-working-dir $module &gt; states/$module/tg.tfstate; \
+  done
+</code></pre></div></div>
+
+<p>Check if the state files were actually saved:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls states/**/tg.tfstate
+</code></pre></div></div>
+<p>It should return a similar list:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>states/project-1/eu-west-1/s3-bucket/example-bucket-1/tg.tfstate
+states/project-1/eu-west-1/s3-bucket/example-bucket-2/tg.tfstate
+states/project-1/eu-west-1/s3-bucket/example-bucket-3/tg.tfstate
+...
+</code></pre></div></div>
+
+<p>Now that we have our Terragrunt state files locally,
+we can go to the next step and actually detect the infrastructure drift.</p>
+
+<h3 id="detect-infrastructure-drift">Detect Infrastructure Drift</h3>
+<p>Driftctl scans all live resources in the same account that AWS is authenticated to.</p>
+
+<p>If the AWS CLI region is set to <code class="language-plaintext highlighter-rouge">eu-west-2</code>, but the state files have resources from <code class="language-plaintext highlighter-rouge">eu-west-1</code>
+region, it will show that resources are found in the state, but not in the AWS account.
+Also, driftctl will always scan global resources like IAM users or Route53 zones.</p>
+
+<p>In order to match my current AWS region and global resources,
+I always use two <code class="language-plaintext highlighter-rouge">tfstate://</code> glob patterns:
+one for the current region and one for global resources.</p>
+
+<p>Here is my resulting driftctl command.
+Let’s run it to detect the infrastructure drift in the <code class="language-plaintext highlighter-rouge">eu-west-1</code> region.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export AWS_REGION=eu-west-1
+driftctl scan --from tfstate://states/**/$AWS_REGION/**/tg.tfstate,tfstate://states/**/global/**/tg.tfstate
+</code></pre></div></div>
+
+<p>Here are the scan results:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Found resources not covered by IaC:
+  aws_api_gateway_account:
+    - api-gateway-account
+  aws_iam_access_key:
+    - AKIA123456789EXAMPLE
+        User: example-user-2
+  aws_iam_role:
+    - OrganizationAccountAccessRole
+  aws_iam_role_policy:
+    - OrganizationAccountAccessRole:AdministratorAccess
+  aws_network_acl_rule:
+    - nacl-1234567891
+        CIDR: 0.0.0.0/0, Egress: true, Network: acl-1aa2b333, Protocol: All, Rule number: 100
+    - nacl-1234567892
+        CIDR: 0.0.0.0/0, Egress: false, Network: acl-1aa2b444, Protocol: All, Rule number: 100
+Found changed resources:
+  From tfstate://states/project-1/global/iam-assumable-role/example-role-1/tg.tfstate
+    - example-role-1 (aws_iam_role.this):
+        - name_prefix: "" =&gt; &lt;nil&gt;
+        - permissions_boundary: "" =&gt; &lt;nil&gt;
+  From tfstate://states/project-2/global/iam-policy/example-policy-1/tg.tfstate
+    - example-policy-1 (aws_iam_policy.this):
+        - name_prefix: "" =&gt; &lt;nil&gt;
+Found 60 resource(s)
+ - 90% coverage
+ - 54 resource(s) managed by terraform
+     - 2/54 resource(s) out of sync with Terraform state
+ - 6 resource(s) not managed by Terraform
+ - 0 resource(s) found in a Terraform state but missing on the cloud provider
+</code></pre></div></div>
+
+<p>It gives a great overview of how my live cloud resources match the Terragrunt state.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>Driftctl is an amazing tool that helps detect infrastructure drift.
+It can work with Terragrunt even with custom workflows and structure.
+I will use this tool for catching all unmanaged resources across all of my cloud accounts.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="terraform" /><category term="terragrunt" /><category term="driftctl" /><summary type="html"><![CDATA[Driftctl is a tool that helps detect infrastructure drift by comparing Terraform state with live resources. It returns a list of resources not covered by infrastructure as code (IaC) codebase.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">On-Call: Leave It Better Than You Found It</title><link href="https://ernestas.me/on-call-leave-it-better-than-you-found-it" rel="alternate" type="text/html" title="On-Call: Leave It Better Than You Found It" /><published>2021-11-14T00:00:00+00:00</published><updated>2021-11-14T00:00:00+00:00</updated><id>https://ernestas.me/on-call-leave-it-better-than-you-found-it</id><content type="html" xml:base="https://ernestas.me/on-call-leave-it-better-than-you-found-it"><![CDATA[<p>During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. 
+They solve any issues that occur 24/7 throughout the infrastructure.</p>
+
+<p>In the past two years, I’ve been participating in on-call rotations as a 
+Site Reliability Engineer at Vinted. 
+Here are some of the practical lessons I’ve learned about the process.</p>
+
+<h2 id="prepare-your-tools">Prepare Your Tools</h2>
+<p>My first on-call felt too quiet. I wasn’t getting any alerts or requests. This was because my phone automatically went into “do not disturb” mode.</p>
+
+<p>Before going on-call, enable notifications on your phone and remove the automatic “do not disturb” rules. Make sure you are always logged in to main services like GitHub, Slack, and monitoring tools. You don’t want to type your password and wait for 2FA provider notification during an incident. Test your mobile hotspot connection and always keep your laptop and charger nearby.</p>
+
+<p>Having the tools required for the job seems like an obvious thing to do, but during on-call it’s even more important.</p>
+
+<h2 id="improve-monitoring">Improve Monitoring</h2>
+<p>If you see that some alert wakes you up from your sleep and it can wait, make sure to fix it, so it’s sent during business hours. Even better, downgrade the alert severity and reduce the total number of total alerts sent.<br />
+For me, the best pull request is with more lines of code deleted than added. The same logic applies to alerting. Only by going on call will you learn which alerts are relevant and actionable.</p>
+
+<p>Another important thing in monitoring is runbooks. If you get an alert and have no idea how to act on it, check if there’s a runbook for it. If not, create one after you find the solution to the problem.</p>
+
+<h2 id="improve-infrastructure">Improve Infrastructure</h2>
+<p>Don’t limit yourself to monitoring, improve other parts of the infrastructure too! It’s good practice to patch things and automate them right away. It may be an alert about a server running out of storage or some other failing task.</p>
+
+<p>If you see that some service is crashing on a virtual machine, try to find the root cause. Did it start processing more data than before? Increase vCPUs.</p>
+
+<p>Have you found a server with some old configuration option that causes it to crash? Reconfigure it right now instead of adding the task to the backlog.</p>
+
+<p>For example, a server running Docker could alert that it’s running out of storage. Instead of running a prune command, create a cron job that does it for you on all instances of Docker. Even better, adjust the Docker configuration so it doesn’t leave dangling images and containers.</p>
+
+<p>By constantly improving infrastructure, you’ll make it better and learn new things.</p>
+
+<h2 id="write-post-mortems">Write Post-Mortems</h2>
+<p>Write good and actionable post-mortems. They are intended to investigate what happened and what steps must be taken to ensure that it does not happen again.</p>
+
+<p>Make sure to find the exact root cause of the incident, research and test all scenarios, and provide concrete steps your team will take to solve the issue.</p>
+
+<p>Communicate that to the whole company, so they know your team is taking care of it. This will help build professionalism and trust in the company, so it’s definitely worth it.</p>
+
+<h2 id="take-some-time-to-learn">Take Some Time to Learn</h2>
+<p>On-call is the only time you will connect to all those servers that you have no idea what they’re doing. This is a good opportunity to learn about the infrastructure that you regularly don’t deal with.</p>
+
+<p>Take some time to dig into how all the systems are configured. Read the official documentation. Read configuration playbooks and try to understand how they fit into the bigger picture. Check service discovery tools to understand what services your company is running.</p>
+
+<p>Invest the time during on-call because after it ends, you’ll get back to your project work.</p>
+
+<h2 id="ask-for-help">Ask For Help</h2>
+<p>Don’t be afraid to ask your teammates for help. Nobody will be angry if you don’t know even the most trivial fix to the problem.</p>
+
+<p>During an incident, everyone wants one thing: to end the incident.</p>
+
+<p>It’s better that you try to contribute than be shy and keep the possible resolution to yourself. Your colleagues will be glad to help you if you don’t understand something.</p>
+
+<h2 id="stay-calm">Stay Calm</h2>
+<p>Production incidents are inevitable. They happen in all companies, and they will happen in your company as well. They will happen when you’re on-call. Don’t panic and stay calm!</p>
+
+<p>I got “lucky” and we had a production incident that caused full downtime during my first on-call.</p>
+
+<p>In short, here’s how it went (redacted for privacy):</p>
+<ul>
+  <li>19:44 - Alert from PagerDuty.</li>
+  <li>19:47 - I am trying to create incident channel. Slack doesn’t load. I close Slack, re-open it. I try to invite my teammates to incident channel, only half of them are actually invited. Slack crashes again. Finally I manage to invite all team members to incident channel.</li>
+  <li>19:48 - We begin digging into the issue.</li>
+  <li>20:13 - We find the root cause.</li>
+  <li>20:19 - We apply the first fix.</li>
+  <li>20:23 - First outage ends.</li>
+  <li>20:40 - Second wave of alerts from PagerDuty.</li>
+  <li>20:42 - We immediately notice the leftover issue and apply the second fix.</li>
+  <li>20:43 - For a short moment all portals are down until we switch traffic.</li>
+  <li>20:44 - Outage ends.</li>
+</ul>
+
+<p>Those moments can be stressful, but with the right mindset they are just another part of your work.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>On-calls can be intimidating, but once you develop the habit of constantly improving everything, they can become something you wait for.</p>
+
+<p>It helps a lot to know that your team is behind you and that nobody will judge you over the mistakes you make.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="devops" /><category term="helpdesk" /><category term="career" /><summary type="html"><![CDATA[During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. They solve any issues that occur 24/7 throughout the infrastructure.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Working From Home: My Setup</title><link href="https://ernestas.me/wfh-my-setup" rel="alternate" type="text/html" title="Working From Home: My Setup" /><published>2021-10-01T00:00:00+00:00</published><updated>2021-10-01T00:00:00+00:00</updated><id>https://ernestas.me/wfh-my-setup</id><content type="html" xml:base="https://ernestas.me/wfh-my-setup"><![CDATA[<p>Since the pandemic happened, I always wanted to create a minimal,
+but ergonomic working environment at home.</p>
+
+<p>Finally, I am happy how it turned out:</p>
+
+<p><img src="/images/2021/10/home-office-3.jpg" alt="Home Office" />
+<img src="/images/2021/10/home-office-1.jpg" alt="Home Office" /></p>
+
+<p>Here is short overview.</p>
+
+<p><strong>Equipment</strong><br />
+<a href="#laptop">Laptop: Lenovo ThinkPad P1 Gen3 15”</a><br />
+<a href="#monitor">Monitor: LG 27” 4K UHD IPS (27UK670-B)</a><br />
+<a href="#keyboard">Keyboard: Logitech MX Keys</a><br />
+<a href="#mouse">Mouse: Logitech MX Master 3</a><br />
+<a href="#headphones">Headphones: Samsung Galaxy Buds Pro</a></p>
+
+<p><strong>Furniture</strong><br />
+<a href="#lamp">Lamp: Ikea Riggad</a><br />
+<a href="#chair">Chair: Ikea Alefjäll</a><br />
+<a href="#desk">Desk: Narbutas Active</a></p>
+
+<p><a name="laptop"></a></p>
+
+<h2 id="laptop-lenovo-thinkpad-p1-gen3-15">Laptop: Lenovo ThinkPad P1 Gen3 15”</h2>
+<p>Shop: <a href="https://www.lenovo.com/us/en/outletus/laptops/thinkpad/thinkpad-p/ThinkPad-P1-Gen-3/p/20TJS3SV00">Lenovo.com</a></p>
+
+<p><img src="/images/2021/10/home-office-6.jpg" alt="Lenovo ThinkPad P1 Gen3" />
+<img src="/images/2021/10/home-office-5.jpg" alt="Lenovo ThinkPad P1 Gen3" />
+In short, it’s is a well built mobile workstation, which runs absolutely great with Linux. 
+It’s a perfect choice for engineers who need enough computing power and a 
+comfortable typing experience. Works for me.</p>
+
+<p>Check <a href="/lenovo-thinkpad-p1-gen3">my own review</a> of the Lenovo ThinkPad P1 for more details.</p>
+
+<p><a name="monitor"></a></p>
+<h2 id="monitor-lg-27-4k-uhd-ips-27uk670-b">Monitor: LG 27” 4K UHD IPS (27UK670-B)</h2>
+<p>Shop: <a href="https://www.amazon.de/dp/B07NDMQKTC">Amazon.de</a></p>
+
+<p><img src="/images/2021/10/home-office-2.jpg" alt="LG 27&quot; 4K UHD IPS" />
+It’s an affordable 4K UHD monitor with a built-in USB-C hub. 
+The monitor has a low input lag, good color accuracy, wide viewing angles, 
+and a great resolution that enchances details nicely. 
+USB-C hub provides 60W of power to my laptop, enough to charge it during low performance usage. 
+It’s more than enough for me.</p>
+
+<p><a name="keyboard"></a></p>
+<h2 id="keyboard-logitech-mx-keys">Keyboard: Logitech MX Keys</h2>
+<p>Shop: <a href="https://www.amazon.de/dp/B07W7KRXDW">Amazon.de</a><br />
+Review: <a href="https://www.pcmag.com/reviews/logitech-mx-keys">PC Mag</a></p>
+
+<p><img src="/images/2021/10/logitech-mx-keys-1.jpg" alt="Logitech MX Keys" />
+<img src="/images/2021/10/logitech-mx-keys-2.jpg" alt="Logitech MX Keys" />
+<img src="/images/2021/10/logitech-mx-keys-4.jpg" alt="Logitech MX Keys" />
+Keyboards are something you can never have enough. I owned a wide range of keyboards, 
+but I can’t remember ever being happy with at least one of them. Some keyboards are too loud, 
+some don’t have the basic functionality like multiple Bluetooth device connections, 
+others are locked to a single platform.</p>
+
+<p>Logitech MX Keys solved all of those issues for me. I think, 
+I finally found the right (not perfect) keyboard. It gives me a decent typing expierence 
+both on Linux and macOS.</p>
+
+<p><a name="mouse"></a></p>
+<h2 id="mouse-logitech-mx-master-3">Mouse: Logitech MX Master 3</h2>
+<p>Shop: <a href="https://www.amazon.de/dp/B07W6JG6Z7">Amazon.de</a><br />
+Review: <a href="https://www.pcmag.com/reviews/logitech-mx-master-3">PC Mag</a></p>
+
+<p><img src="/images/2021/10/logitech-mx-master-3-1.jpg" alt="Logitech MX Master 3" />
+MX Master 3 is one of the best computer mouses you can get on the market. 
+Reviews are wonderful and I am happy with it, but I still think that any cheaper 
+Logitech mouse would do the job.</p>
+
+<p><a name="headphones"></a></p>
+<h2 id="headphones-samsung-galaxy-buds-pro">Headphones: Samsung Galaxy Buds Pro</h2>
+<p>Shop: <a href="https://www.amazon.de/dp/B08QYRYH9J">Amazon.de</a><br />
+Review: <a href="https://www.pcmag.com/reviews/samsung-galaxy-buds-pro">PC Mag</a></p>
+
+<p><img src="/images/2021/10/samsung-galaxy-buds-pro-1.jpg" alt="Samsung Galaxy Buds Pro" />
+<img src="/images/2021/10/samsung-galaxy-buds-pro-2.jpg" alt="Samsung Galaxy Buds Pro" />
+Great in-ear headphones for meetings and casual music listening. Easy to use, strong audio performance, average active noise cancellation and a decent battery life. Sounds good to me.</p>
+
+<p><a name="lamp"></a></p>
+<h2 id="lamp-ikea-riggad">Lamp: Ikea Riggad</h2>
+<p>Link: <a href="https://www.ikea.lt/lt/products/svetaine/gyvenamojo-kambario-apsvietimas/stalo-sviestuvai/nymane-sviestuvas-su-belaid-ikr-balta-art-10448603">Ikea</a> 
+(Riggad is not manufactured anymore, the new model is Nymåne).</p>
+
+<p><img src="/images/2021/10/home-office-10.jpg" alt="Ikea Riggad" />
+I can’t say much about a lamp. It works. It even has an USB and a wireless charging ports.</p>
+
+<p><a name="chair"></a></p>
+<h2 id="chair-ikea-alefjäll">Chair: Ikea Alefjäll</h2>
+<p>Link: <a href="https://www.ikea.lt/lt/products/namu-biuras/sedimieji-biuro-baldai/biuro-kedes/alefjall-biuro-kede-juoda-art-70367458">Ikea</a></p>
+
+<p><img src="/images/2021/10/home-office-7.jpg" alt="Ikea Alefjäll" />
+It’s very rare to find a comfortable office chair that also looks stylish.
+Distinct retro design makes it fit into my home office corner nicely.
+It has a tilt and height adjustment function for back support, seat and backrest 
+adjustments for my height and posture.
+The build quality seems robust, so it should last for a long time.</p>
+
+<p><a name="desk"></a></p>
+<h2 id="desk-narbutas-active">Desk: Narbutas Active</h2>
+<p>Shop: <a href="https://www.narbutas.com/products/desks-desks/sit-stand-desks/active/">Narbutas</a></p>
+
+<p><img src="/images/2021/10/custom-desk-2.jpg" alt="Narbutas Active" />
+Here is how the desk looked originally. 
+When I got it from my work office, I have removed the original desk top and replaced it with a custom one made from oak.</p>
+
+<p><img src="/images/2021/10/custom-desk-21.jpg" alt="Narbutas Active" />
+Here is how it looks after the replacement. Better, right?</p>
+
+<p>If you want to see more about the DYI project, check <a href="/wfh-building-custom-standing-desk">this post</a>.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="wfh" /><category term="workplace" /><category term="remote-work" /><summary type="html"><![CDATA[Since the pandemic happened, I always wanted to create a minimal, but ergonomic working environment at home.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/2021/10/home-office-3.jpg" /><media:content medium="image" url="https://ernestas.me/images/2021/10/home-office-3.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Working From Home: Building Custom Standing Desk</title><link href="https://ernestas.me/wfh-building-custom-standing-desk" rel="alternate" type="text/html" title="Working From Home: Building Custom Standing Desk" /><published>2021-10-01T00:00:00+00:00</published><updated>2021-10-01T00:00:00+00:00</updated><id>https://ernestas.me/wfh-building-custom-standing-desk</id><content type="html" xml:base="https://ernestas.me/wfh-building-custom-standing-desk"><![CDATA[<p>During the pandemic, I got a standing desk from my work office. 
+The plain white desk reminded me of the place where it came from: my office. 
+It needed some upgrades.</p>
+
+<p>Here is a short DYI project for building a custom standing desk.</p>
+
+<p><img src="/images/2021/10/home-office-9.jpg" alt="Home Office" />
+Here is how <a href="/wfh-my-setup">my home office</a> corner looks now with fully assembled 
+desk and custom made oak top.</p>
+
+<p><img src="/images/2021/10/custom-desk-2.jpg" alt="Desk" />
+And here is how the original desk looked like. Not so pretty.</p>
+
+<p><img src="/images/2021/10/custom-desk-29.png" alt="Desk Drawing" />
+I drew the desk top using Sketch Up with my required dimensions and location for 
+extra power socket.</p>
+
+<p>I have sent it to the manufacturer and received the finished oak desk top after two weeks. 
+It was cut and sanded, but not fully finished.</p>
+
+<p><img src="/images/2021/10/custom-desk-10.jpg" alt="Desk" />
+When it came in, I’ve left it in a dry place for two more weeks. 
+Well, it wasn’t a good idea and it got bent really badly. More on that later.</p>
+
+<p><img src="/images/2021/10/custom-desk-11.jpg" alt="Desk" />
+Hole for extra power socket.</p>
+
+<p><img src="/images/2021/10/custom-desk-5.jpg" alt="Desk" />
+Old desk top removed.</p>
+
+<p><img src="/images/2021/10/custom-desk-7.jpg" alt="Desk" />
+Cable management was a bit messy, so I removed everything to properly attach the stuff again.</p>
+
+<p><img src="/images/2021/10/custom-desk-8.jpg" alt="Desk" />
+When it comes to cable management, zip ties are the worst. 
+It can damage the cables if tied too tight. Here is the proof.</p>
+
+<p><img src="/images/2021/10/custom-desk-18.jpg" alt="Desk" />
+Drilling holes for the screws.</p>
+
+<p><img src="/images/2021/10/custom-desk-17.jpg" alt="Desk" />
+I am not sure what is the name of this kind of screw, but it’s really useful. 
+It has an outer thread that holds it inside the wood and an internal thread 
+that holds the screw itself.</p>
+
+<p><img src="/images/2021/10/custom-desk-20.jpg" alt="Desk" />
+I will use those screws to attach the desk top to the frame.</p>
+
+<p><img src="/images/2021/10/custom-desk-24.jpg" alt="Desk" />
+New cable management with velcro. In my expierence, velcro is the best solution 
+for cable management. It doesn’t damage the cables and can still hold them properly.</p>
+
+<p><img src="/images/2021/10/custom-desk-12.jpg" alt="Desk" />
+Now about the bent desk top. I’ve called the manufacturer and asked for advice. 
+They said it’s best if I try to screw it to the frame with longer screws and then apply 
+more pressure each day. In the end, it worked out. 
+It took almost a week until all desk sides were touching the frame.</p>
+
+<p><img src="/images/2021/10/custom-desk-15.jpg" alt="Desk" />
+Then, I have applied Osmo TopOil hardwax-oil wood finish to protect the desk 
+from water or food stains. It protects the desk, but maintains the nice wood texture and feel.</p>
+
+<p><img src="/images/2021/10/custom-desk-21.jpg" alt="Desk" />
+Here is how it looks like after fully drying up.</p>
+
+<p><img src="/images/2021/10/custom-desk-22.jpg" alt="Desk" />
+Looks awesome! Time to install the missing equipment.</p>
+
+<p><img src="/images/2021/10/custom-desk-25.jpg" alt="Desk" />
+<a href="https://www.kedziucentras.lt/produktas/apvalus-elektros-lizdas-80-mm/">Power socket</a> 
+for external charger and extra holes for accessories.</p>
+
+<p><img src="/images/2021/10/custom-desk-28.jpg" alt="Desk" />
+New <a href="https://www.kedziucentras.lt/produktas/laidu-nuvedimo-kanalas-horizontalus/">cable management tray</a> for power strips and chargers.</p>
+
+<p><img src="/images/2021/10/custom-desk-27.jpg" alt="Desk" />
+It hides all the clutter and keeps a clean space under the desk.</p>
+
+<p><img src="/images/2021/10/custom-desk-26.jpg" alt="Desk" />
+Height control buttons re-attached to the desk.</p>
+
+<p><img src="/images/2021/10/home-office-9.jpg" alt="Home Office" /></p>
+
+<p>Finally, the last pieces - <a href="/wfh-my-setup">work equipment</a>.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="wfh" /><category term="workplace" /><category term="remote-work" /><summary type="html"><![CDATA[During the pandemic, I got a standing desk from my work office. The plain white desk reminded me of the place where it came from: my office. It needed some upgrades.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/2021/10/custom-desk-29.png" /><media:content medium="image" url="https://ernestas.me/images/2021/10/custom-desk-29.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Storing Terraform State in Consul</title><link href="https://ernestas.me/storing-terraform-state-in-consul" rel="alternate" type="text/html" title="Storing Terraform State in Consul" /><published>2021-05-03T00:00:00+00:00</published><updated>2021-05-03T00:00:00+00:00</updated><id>https://ernestas.me/storing-terraform-state-in-consul</id><content type="html" xml:base="https://ernestas.me/storing-terraform-state-in-consul"><![CDATA[<p>I was impressed that Terraform performs better with Consul backend instead of S3/DynamoDB.</p>
+
+<p>HashiCorp products integrate seamlessly with each other, so storing Terraform state in a
+Consul cluster is very easy. Just  create a policy, token and define the Terraform backend.</p>
+
+<p>Here are the steps.</p>
+
+<h3 id="create-consul-policy">Create Consul Policy</h3>
+
+<p>Example <code class="language-plaintext highlighter-rouge">policy.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terraform-state"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grants required permissions to store Terraform state"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Rules"</span><span class="p">:</span><span class="w"> </span><span class="s2">"session_prefix </span><span class="se">\"\"</span><span class="s2"> { policy = </span><span class="se">\"</span><span class="s2">write</span><span class="se">\"</span><span class="s2">}, key_prefix </span><span class="se">\"</span><span class="s2">terraform-state/</span><span class="se">\"</span><span class="s2"> { policy = </span><span class="se">\"</span><span class="s2">write</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Datacenters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"dc1"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Note: Key prefix is target location in Consul.
+Session prefix is required for locking Terraform state in Consul.</p>
+
+<p>Create example policy:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="nt">--data</span> @policy.json <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-Consul-Token: </span><span class="nv">$CONSUL_HTTP_TOKEN</span><span class="s2">"</span> http://127.0.0.1:8500/v1/acl/policy
+</code></pre></div></div>
+
+<h3 id="create-consul-token">Create Consul Token</h3>
+
+<p>Example <code class="language-plaintext highlighter-rouge">token.json</code> with <code class="language-plaintext highlighter-rouge">terraform-state</code> policy assigned.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token for Terraform"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Policies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"terraform-state"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"Local"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create example token:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="nt">--data</span> @token.json <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-Consul-Token: </span><span class="nv">$CONSUL_HTTP_TOKEN</span><span class="s2">"</span> http://127.0.0.1:8500/v1/acl/token
+</code></pre></div></div>
+
+<p>Set the resulting <code class="language-plaintext highlighter-rouge">secret_id</code> as <code class="language-plaintext highlighter-rouge">CONSUL_HTTP_TOKEN</code> environment variable on the machine
+where Terraform runs.</p>
+
+<h3 id="configure-terraform-backend">Configure Terraform Backend</h3>
+
+<p>Example <code class="language-plaintext highlighter-rouge">backend.tf</code> with custom path for your module:</p>
+
+<div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">backend</span> <span class="s2">"consul"</span> <span class="p">{</span>
+    <span class="nx">address</span> <span class="p">=</span> <span class="s2">"consul.service.consul:8500"</span>
+    <span class="nx">lock</span>    <span class="p">=</span> <span class="kc">true</span>
+    <span class="nx">path</span>    <span class="p">=</span> <span class="s2">"terraform-state/example/terraform.tfstate"</span>
+    <span class="nx">scheme</span>  <span class="p">=</span> <span class="s2">"http"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That should do the job!</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="terraform" /><category term="consul" /><summary type="html"><![CDATA[I was impressed that Terraform performs better with Consul backend instead of S3/DynamoDB.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Static Comments for Jekyll with GitHub Pages</title><link href="https://ernestas.me/static-comments-for-jekyll-with-github-pages" rel="alternate" type="text/html" title="Static Comments for Jekyll with GitHub Pages" /><published>2021-04-30T00:00:00+00:00</published><updated>2021-04-30T00:00:00+00:00</updated><id>https://ernestas.me/static-comments-for-jekyll-with-github-pages</id><content type="html" xml:base="https://ernestas.me/static-comments-for-jekyll-with-github-pages"><![CDATA[<p>Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website.</p>
+
+<p>Since Jekyll sites are static there was no way to store comments without such external service or database. Well, at least until <a href="https://staticman.net/">Staticman</a>.</p>
+
+<p>Staticman is an open source static comment solution for your Jekyll site. It allows you to have user-generated content on a static website.</p>
+
+<p>I just have finished setting it up on this blog. I have used <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html">this amazing guide</a> by Travis Downs. I’m really happy how it works.
+Here’s a quick summary:</p>
+
+<ol>
+  <li>Staticman can be hosted on any platform with NodeJS. I am using free Heroku app, but there are many other options. More details <a href="https://staticman.net/docs/index.html">here</a>.</li>
+  <li>Jekyll theme will need a simple HTML form that will post comments to Staticman API. I have borrowed most of HTML/CSS/JS from the <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html">guide</a> I mentioned earlier.</li>
+  <li>Staticman will create a <a href="https://github.com/enarmontas/ernestas.me/pull/9">pull request</a> with the comment data. It can also commit directly without approval. Note: GitHub access token is required.</li>
+  <li>You’ll approve the comment and merge the pull request.</li>
+  <li>GitHub Pages (or your custom solution) will build your Jekyll site with the new commit.</li>
+  <li>Comment will appear on your website.</li>
+</ol>
+
+<p>That’s it. When you get it up and running, it works. Try it below.</p>]]></content><author><name>Ernestas Narmontas</name></author><category term="jekyll" /><category term="staticman" /><category term="github" /><category term="githubpages" /><summary type="html"><![CDATA[Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Function Over Form: Mounting External SSD On MacBook</title><link href="https://ernestas.me/function-over-form-mounting-external-ssd-on-macbook" rel="alternate" type="text/html" title="Function Over Form: Mounting External SSD On MacBook" /><published>2021-03-08T00:00:00+00:00</published><updated>2021-03-08T00:00:00+00:00</updated><id>https://ernestas.me/function-over-form-mounting-external-ssd-on-macbook</id><content type="html" xml:base="https://ernestas.me/function-over-form-mounting-external-ssd-on-macbook"><![CDATA[<p>Here is an awesome MacGyver<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> solution for expanding MacBook storage.</p>
+
+<p><img src="/images/2021/macbook-ssd-1.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<h3 id="problem">Problem</h3>
+<p>I use Lightroom CC for editing my photos, so I need to have them on my computer during editing. Currently, my library consists of 20K RAW photos, which takes 350GB of storage. My MacBook Pro comes with 256GB internal SSD, so it can’t store my library.</p>
+
+<p>Lightroom doesn’t perform well with NAS storage, cloud sync is slow and causes high CPU usage, cached image previews are also not enough for me. Since Apple sell their MacBooks with soldered storage devices, there is no option to expand the storage. The only reasonable solution is external SSD drive.</p>
+
+<p>Carrying the laptop with external drive connected around the house is a challenge. I want to move my laptop across different surfaces without disconnecting the external drive. When I am working on a couch, there is no place to store the drive safely. It also gets disconnected easily.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Mount external SSD on the back of my laptop with self adhesive velcro tape.</p>
+
+<p>I was watching Silicon Valley and I noticed that Richard Hendricks had a MacBook with a dongle sticked to the back. This is where I got the idea!
+It’s nothing new or unique, but I never stumbled on it.</p>
+
+<p><img src="/images/2021/apple-macbook-laptop-used-by-thomas-middleditch-as-richard-hendricks-in-silicon-valley-s6e1.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<h3 id="process">Process</h3>
+
+<p>Cut the velcro tape to required length.
+<img src="/images/2021/macbook-ssd-2.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<p>Stick the rough side velcro on the external drive, soft side on the laptop.
+<img src="/images/2021/macbook-ssd-3.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<p>Join both velcro sides together.
+<img src="/images/2021/macbook-ssd-4.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<p>Profit!
+<img src="/images/2021/macbook-ssd-5.jpg" alt="MacBook Pro with External SSD" /></p>
+
+<p><strong>Gear Used</strong></p>
+
+<p>Computer: <strong>MacBook Pro (15-inch, 2019)</strong>. If your laptop comes with swappable storage or extra drive bays, then you’re in luck.</p>
+
+<p>Drive: <strong><a href="https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA1T0B/dp/B073H552FJ">Samsung T5 1TB</a></strong>. I like the drive a lot: it’s light, small, fast and reliable. Currently there is a new Samsung T7 model worth checking out.</p>
+
+<p>Cable: <strong><a href="https://www.amazon.com/dp/B08F9ZTN2J/ref=cm_sw_em_r_mt_dp_5SK71RET7RMZD38PWM5P">EasyAcc USB-C to USB-C 10Gbps (20 cm)</a></strong>. Default Samsung T5 cable is not flexible enough and too long for this to comfortably work.</p>
+
+<p>Tape: <strong><a href="https://www.amazon.de/gp/product/B085NZ5JVT/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&amp;psc=1">Sunriz Self-Adhesive Velcro Tape, (20 mm Wide)</a></strong>. I guess any other brand would do the job.</p>
+
+<h3 id="function-over-form">Function Over Form</h3>
+<p>I posted this solution to <a href="https://www.reddit.com/r/techsupportmacgyver/comments/lyfioa/solution_for_external_ssd/">r/techsupportmacgyver</a>, <a href="https://www.reddit.com/r/macbookpro/comments/lyz5jq/solution_for_external_ssd/">r/macbookpro</a> and <a href="https://www.reddit.com/r/laptops/comments/lyz5bf/solution_for_external_ssd/">r/laptops</a> on Reddit. I was surprised that so many people reacted to it.</p>
+
+<p>It was interesting to see that it sparked a lot of discussion about function over form. People on r/macbookpro were more sceptical than r/techsupportmacgyver or r/laptops, but most people had positive reactions. <a href="https://www.reddit.com/r/macbookpro/comments/lyz5jq/solution_for_external_ssd/gpyfaei?utm_source=share&amp;utm_medium=web2x&amp;context=3">This thread</a> illustrates it perfectly:</p>
+
+<p><img src="/images/2021/macbook-reddit-screenshot.png" alt="MacBook Pro with External SSD" /></p>
+
+<p>I can only agree. Function over form, not vice versa. We should use our devices to do real work, not treat them like jewellery.</p>
+
+<h3 id="discussion">Discussion</h3>
+<ul>
+  <li>Reddit: [<a href="https://www.reddit.com/r/techsupportmacgyver/comments/lyfioa/solution_for_external_ssd">r/techsupportmacgyver</a>, <a href="https://www.reddit.com/r/macbookpro/comments/lyz5jq/solution_for_external_ssd">r/macbookpro</a>, <a href="https://www.reddit.com/r/laptops/comments/lyz5bf/solution_for_external_ssd">r/laptops</a>]</li>
+</ul>
+
+<h3 id="notes">Notes</h3>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Character and the protagonist in the TV series <a href="https://www.imdb.com/title/tt0088559">MacGyver</a>. <a href="https://www.urbandictionary.com/define.php?term=Macgyver">Urban Dictionary</a> describes it the best: “the ability to use a dorito, some duct tape, and a paper clip to create a time machine”. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Ernestas Narmontas</name></author><category term="macbook" /><category term="samsung" /><category term="ssd" /><category term="macgyver" /><category term="tipsandtricks" /><category term="lightroom" /><summary type="html"><![CDATA[Here is an awesome MacGyver1 solution for expanding MacBook storage. Character and the protagonist in the TV series MacGyver. Urban Dictionary describes it the best: “the ability to use a dorito, some duct tape, and a paper clip to create a time machine”. &#8617;]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ernestas.me/images/site/terminal-1600-800.jpg" /><media:content medium="image" url="https://ernestas.me/images/site/terminal-1600-800.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

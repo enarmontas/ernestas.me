@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+  
+
+  <title>Common Configurations with Terragrunt | Ernestas</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Common Configurations with Terragrunt" />
+<meta name="author" content="Ernestas Narmontas" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Terragrunt supports multiple included files, which is a great way to have common configurations with module definitions and default values included in any child configurations. Here is a short explanation of how it works." />
+<meta property="og:description" content="Terragrunt supports multiple included files, which is a great way to have common configurations with module definitions and default values included in any child configurations. Here is a short explanation of how it works." />
+<link rel="canonical" href="https://ernestas.me/common-configurations-with-terragrunt" />
+<meta property="og:url" content="https://ernestas.me/common-configurations-with-terragrunt" />
+<meta property="og:site_name" content="Ernestas" />
+<meta property="og:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="twitter:title" content="Common Configurations with Terragrunt" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ernestas Narmontas","url":"https://ernestas.me"},"dateModified":"2022-06-13T00:00:00+00:00","datePublished":"2022-06-13T00:00:00+00:00","description":"Terragrunt supports multiple included files, which is a great way to have common configurations with module definitions and default values included in any child configurations. Here is a short explanation of how it works.","headline":"Common Configurations with Terragrunt","image":"https://ernestas.me/images/site/terminal-1600-800.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ernestas.me/common-configurations-with-terragrunt"},"url":"https://ernestas.me/common-configurations-with-terragrunt"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://ernestas.me/feed.xml" title="Ernestas" />
+
+  <!-- Google Analytics -->
+  
+
+  <!-- Mastodon verification -->
+  
+  <link rel="me" href="https://mstdn.lt/@ernestas">
+  
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59118080-2', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+
+  <body>
+
+    
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">Ernestas</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/lt/">Lietuviškai 🇱🇹</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    
+    <span>Author</span>
+    
+    Ernestas Narmontas
+    
+    
+
+    
+    <br>
+    <time datetime="2022-06-13 00:00:00 +0000">2022-06-13</time>
+    
+  </div>
+
+  <h1 class="post-title">Common Configurations with Terragrunt</h1>
+  <div class="post-line"></div>
+
+  <p>Terragrunt supports multiple included files, which is a great way to have common configurations 
+with module definitions and default values included in any child configurations. 
+Here is a short explanation of how it works.</p>
+
+<h2 id="example">Example</h2>
+<p>Usually, when I write a Terragrunt module, I define the following blocks:</p>
+
+<p>First, I define a Terraform block with a module source.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform {
+  source = "git::git@github.com:example/modules.git//aws/vpc?ref=v0.10.0"
+}
+</code></pre></div></div>
+
+<p>Then, I define a Terragrunt block to include the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file with backend, provider,
+and other configurations across all of my environments and accounts.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include {
+  path = find_in_parent_folders()
+}
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">find_in_parent_folders()</code> method traverses the directory tree beginning with the current 
+<code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file and returns the absolute path to the first <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> in a parent 
+folder. This block is required in any Terragrunt repository with a parent-child structure.</p>
+
+<p>Finally, I can define the <code class="language-plaintext highlighter-rouge">inputs</code> block to pass all the required values to the module:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputs = {
+  name  = "example-vpc"
+  other = "example-value"
+  ...
+}
+</code></pre></div></div>
+
+<p>Here is the resulting child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform {
+  source = "git::git@github.com:example/modules.git//aws/vpc?ref=v0.10.0"
+}
+
+include {
+  path = find_in_parent_folders()
+}
+
+inputs = {
+  name  = "example-vpc"
+  other = "example-value"
+  ...
+}
+</code></pre></div></div>
+
+<h2 id="problem">Problem</h2>
+<p>Let’s say I need to define 10 configurations with the same module. 
+By using the same static config, I’ll end up repeating the same Terraform source with locked module 
+versions and most of the inputs.</p>
+
+<p>In order to write less code and have more dynamic definitions, 
+I can define a common configuration for the same module and then include it in the 
+child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code>. Here is an example:</p>
+
+<p>Let’s create a file <code class="language-plaintext highlighter-rouge">example-module.hcl</code> in the <code class="language-plaintext highlighter-rouge">common</code> folder:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
+  module_url     = "git::git@github.com:example/modules.git//aws/vpc"
+  module_version = "v0.10.0"
+}
+
+terraform {
+  source = "${local.module_url}?ref=${local.module_version}"
+}
+
+inputs = {
+  other = "example-value"
+}
+</code></pre></div></div>
+
+<p>Now the child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configurations can include this file in order to have the same 
+module definition and same inputs across all environments and accounts with the ability to 
+override them in the child configurations.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>Let’s add everything together in a new <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> child configuration file.</p>
+
+<p>First, define the root <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> include block and give it a name:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "root" {
+  path = find_in_parent_folders()
+}
+</code></pre></div></div>
+
+<p>Then, include the common module config:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "module" {
+  path = "${get_path_to_repo_root()}/common/modules/example-module.hcl"
+}
+</code></pre></div></div>
+
+<p>Finally, define inputs that are unique for the specific resource:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputs = {
+  name = "example-vpc"
+}
+</code></pre></div></div>
+
+<p>Here is the resulting child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configuration with a dynamically included module:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>include "root" {
+  path = find_in_parent_folders()
+}
+
+include "module" {
+  path = "${get_path_to_repo_root()}/common/modules/example-module.hcl"
+}
+
+inputs = {
+  name = "example-vpc"
+}
+</code></pre></div></div>
+
+<p>During the Terragrunt run, the common module configuration will be merged with 
+the child <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> configuration, merging all blocks and inputs into one configuration. 
+It works with Terragrunt out of the box, and it also works with the
+<a href="https://github.com/transcend-io/terragrunt-atlantis-config">Terragrunt config generator</a> if you 
+use <a href="https://github.com/runatlantis/atlantis">Atlantis</a> for your CI/CD pipelines.</p>
+
+<p>Now, when you want to bump the <code class="language-plaintext highlighter-rouge">example-module</code> version, you only need to do it once in 
+the <code class="language-plaintext highlighter-rouge">common/example-module.hcl</code> file and all the child configurations will pick up the change 
+during subsequent Terragrunt runs.
+Plus, if you want to override some common input value or module source, 
+just do it in the child configuration and it will take precedence over the included one.</p>
+
+<p>You can see a similar example of the same pattern in the official 
+<a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example/tree/master/_envcommon">Terragrunt live infrastructure example repo</a>.</p>
+
+
+</div>
+
+
+
+
+<section class="comments" id="comment-section">
+  <hr>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments">
+  <input type="hidden" name="options[origin]" value="https://ernestas.me/common-configurations-with-terragrunt">
+  <input type="hidden" name="options[parent]" value="https://ernestas.me/common-configurations-with-terragrunt">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="common-configurations-with-terragrunt">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ernestas.me/common-configurations-with-terragrunt#respond" style="display:none;">&nbsp;(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII"></div>
+
+    <button class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascript/static-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
+<div class="pagination">
+  
+  
+  <a href="/polkit-package-update-on-centos-7" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2024-05-22 06:56:49 +0000">2024</time> Ernestas Narmontas. Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+<a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+
+  </span>
+</footer>
+
+  </body>
+</html>

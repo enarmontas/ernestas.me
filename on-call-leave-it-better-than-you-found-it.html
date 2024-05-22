@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+  
+
+  <title>On-Call: Leave It Better Than You Found It | Ernestas</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="On-Call: Leave It Better Than You Found It" />
+<meta name="author" content="Ernestas Narmontas" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. They solve any issues that occur 24/7 throughout the infrastructure." />
+<meta property="og:description" content="During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. They solve any issues that occur 24/7 throughout the infrastructure." />
+<link rel="canonical" href="https://ernestas.me/on-call-leave-it-better-than-you-found-it" />
+<meta property="og:url" content="https://ernestas.me/on-call-leave-it-better-than-you-found-it" />
+<meta property="og:site_name" content="Ernestas" />
+<meta property="og:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="twitter:title" content="On-Call: Leave It Better Than You Found It" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ernestas Narmontas","url":"https://ernestas.me"},"dateModified":"2021-11-14T00:00:00+00:00","datePublished":"2021-11-14T00:00:00+00:00","description":"During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. They solve any issues that occur 24/7 throughout the infrastructure.","headline":"On-Call: Leave It Better Than You Found It","image":"https://ernestas.me/images/site/terminal-1600-800.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ernestas.me/on-call-leave-it-better-than-you-found-it"},"url":"https://ernestas.me/on-call-leave-it-better-than-you-found-it"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://ernestas.me/feed.xml" title="Ernestas" />
+
+  <!-- Google Analytics -->
+  
+
+  <!-- Mastodon verification -->
+  
+  <link rel="me" href="https://mstdn.lt/@ernestas">
+  
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59118080-2', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+
+  <body>
+
+    
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">Ernestas</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/lt/">Lietuviškai 🇱🇹</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    
+    <span>Author</span>
+    
+    Ernestas Narmontas
+    
+    
+
+    
+    <br>
+    <time datetime="2021-11-14 00:00:00 +0000">2021-11-14</time>
+    
+  </div>
+
+  <h1 class="post-title">On-Call: Leave It Better Than You Found It</h1>
+  <div class="post-line"></div>
+
+  <p>During on-call, SREs handle all incidents, react to alerts, and respond to developer requests. 
+They solve any issues that occur 24/7 throughout the infrastructure.</p>
+
+<p>In the past two years, I’ve been participating in on-call rotations as a 
+Site Reliability Engineer at Vinted. 
+Here are some of the practical lessons I’ve learned about the process.</p>
+
+<h2 id="prepare-your-tools">Prepare Your Tools</h2>
+<p>My first on-call felt too quiet. I wasn’t getting any alerts or requests. This was because my phone automatically went into “do not disturb” mode.</p>
+
+<p>Before going on-call, enable notifications on your phone and remove the automatic “do not disturb” rules. Make sure you are always logged in to main services like GitHub, Slack, and monitoring tools. You don’t want to type your password and wait for 2FA provider notification during an incident. Test your mobile hotspot connection and always keep your laptop and charger nearby.</p>
+
+<p>Having the tools required for the job seems like an obvious thing to do, but during on-call it’s even more important.</p>
+
+<h2 id="improve-monitoring">Improve Monitoring</h2>
+<p>If you see that some alert wakes you up from your sleep and it can wait, make sure to fix it, so it’s sent during business hours. Even better, downgrade the alert severity and reduce the total number of total alerts sent.<br />
+For me, the best pull request is with more lines of code deleted than added. The same logic applies to alerting. Only by going on call will you learn which alerts are relevant and actionable.</p>
+
+<p>Another important thing in monitoring is runbooks. If you get an alert and have no idea how to act on it, check if there’s a runbook for it. If not, create one after you find the solution to the problem.</p>
+
+<h2 id="improve-infrastructure">Improve Infrastructure</h2>
+<p>Don’t limit yourself to monitoring, improve other parts of the infrastructure too! It’s good practice to patch things and automate them right away. It may be an alert about a server running out of storage or some other failing task.</p>
+
+<p>If you see that some service is crashing on a virtual machine, try to find the root cause. Did it start processing more data than before? Increase vCPUs.</p>
+
+<p>Have you found a server with some old configuration option that causes it to crash? Reconfigure it right now instead of adding the task to the backlog.</p>
+
+<p>For example, a server running Docker could alert that it’s running out of storage. Instead of running a prune command, create a cron job that does it for you on all instances of Docker. Even better, adjust the Docker configuration so it doesn’t leave dangling images and containers.</p>
+
+<p>By constantly improving infrastructure, you’ll make it better and learn new things.</p>
+
+<h2 id="write-post-mortems">Write Post-Mortems</h2>
+<p>Write good and actionable post-mortems. They are intended to investigate what happened and what steps must be taken to ensure that it does not happen again.</p>
+
+<p>Make sure to find the exact root cause of the incident, research and test all scenarios, and provide concrete steps your team will take to solve the issue.</p>
+
+<p>Communicate that to the whole company, so they know your team is taking care of it. This will help build professionalism and trust in the company, so it’s definitely worth it.</p>
+
+<h2 id="take-some-time-to-learn">Take Some Time to Learn</h2>
+<p>On-call is the only time you will connect to all those servers that you have no idea what they’re doing. This is a good opportunity to learn about the infrastructure that you regularly don’t deal with.</p>
+
+<p>Take some time to dig into how all the systems are configured. Read the official documentation. Read configuration playbooks and try to understand how they fit into the bigger picture. Check service discovery tools to understand what services your company is running.</p>
+
+<p>Invest the time during on-call because after it ends, you’ll get back to your project work.</p>
+
+<h2 id="ask-for-help">Ask For Help</h2>
+<p>Don’t be afraid to ask your teammates for help. Nobody will be angry if you don’t know even the most trivial fix to the problem.</p>
+
+<p>During an incident, everyone wants one thing: to end the incident.</p>
+
+<p>It’s better that you try to contribute than be shy and keep the possible resolution to yourself. Your colleagues will be glad to help you if you don’t understand something.</p>
+
+<h2 id="stay-calm">Stay Calm</h2>
+<p>Production incidents are inevitable. They happen in all companies, and they will happen in your company as well. They will happen when you’re on-call. Don’t panic and stay calm!</p>
+
+<p>I got “lucky” and we had a production incident that caused full downtime during my first on-call.</p>
+
+<p>In short, here’s how it went (redacted for privacy):</p>
+<ul>
+  <li>19:44 - Alert from PagerDuty.</li>
+  <li>19:47 - I am trying to create incident channel. Slack doesn’t load. I close Slack, re-open it. I try to invite my teammates to incident channel, only half of them are actually invited. Slack crashes again. Finally I manage to invite all team members to incident channel.</li>
+  <li>19:48 - We begin digging into the issue.</li>
+  <li>20:13 - We find the root cause.</li>
+  <li>20:19 - We apply the first fix.</li>
+  <li>20:23 - First outage ends.</li>
+  <li>20:40 - Second wave of alerts from PagerDuty.</li>
+  <li>20:42 - We immediately notice the leftover issue and apply the second fix.</li>
+  <li>20:43 - For a short moment all portals are down until we switch traffic.</li>
+  <li>20:44 - Outage ends.</li>
+</ul>
+
+<p>Those moments can be stressful, but with the right mindset they are just another part of your work.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>On-calls can be intimidating, but once you develop the habit of constantly improving everything, they can become something you wait for.</p>
+
+<p>It helps a lot to know that your team is behind you and that nobody will judge you over the mistakes you make.</p>
+
+
+</div>
+
+
+
+
+<section class="comments" id="comment-section">
+  <hr>
+  
+  <!-- Existing comments -->
+  <div class="comments__existing">
+    <h2>Comments</h2>
+    
+    
+    <!-- List main comments in reverse date order, newest first. List replies in date order, oldest first. -->
+    
+    
+
+<article id="comment-51613770-cc6d-11ec-850c-17904402a5d3" class="js-comment comment" uid="51613770-cc6d-11ec-850c-17904402a5d3">
+
+  <div class="comment__author">Joel Vaz,
+    <span class="comment__date"><a href="#comment-51613770-cc6d-11ec-850c-17904402a5d3" title="Permalink to this comment">2022-05-05 12:17</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Amazing article! 
+Thank you for sharing your experience</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-51613770-cc6d-11ec-850c-17904402a5d3', 'respond', 'on-call-leave-it-better-than-you-found-it', '51613770-cc6d-11ec-850c-17904402a5d3')">↪&#xFE0E;
+    Reply to Joel Vaz</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-1f3332a0-ca31-11ec-a610-a71b942ade1f" class="js-comment comment" uid="1f3332a0-ca31-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">debbie downer,
+    <span class="comment__date"><a href="#comment-1f3332a0-ca31-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 16:01</a></span>
+  </div>
+
+  <div class="comment__body">
+    <blockquote>
+  <p>Instead of running a prune command, create a cron job that does it for you on all instances of Docker.</p>
+</blockquote>
+
+<p>Stuff like this is how you get outages in the first place. Don’t do this. Test your changes and go through the usual release cycle instead. Guerrilla bandages create hidden time bombs.</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-1f3332a0-ca31-11ec-a610-a71b942ade1f', 'respond', 'on-call-leave-it-better-than-you-found-it', '1f3332a0-ca31-11ec-a610-a71b942ade1f')">↪&#xFE0E;
+    Reply to debbie downer</a>
+</div>
+</article>
+
+
+<article id="comment-e706c120-ca40-11ec-a610-a71b942ade1f" class="js-comment comment child" uid="e706c120-ca40-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">Ernestas,
+    <span class="comment__date"><a href="#comment-e706c120-ca40-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 17:54</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>I agree, in the same paragraph I provided a better solution - adjusting the configuration so it doesn’t leave any dangling containers.</p>
+
+  </div>
+
+  
+</article>
+
+
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-ff498d10-ca1f-11ec-a610-a71b942ade1f" class="js-comment comment" uid="ff498d10-ca1f-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">the homie,
+    <span class="comment__date"><a href="#comment-ff498d10-ca1f-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 13:58</a></span>
+  </div>
+
+  <div class="comment__body">
+    <h1 id="very-cool">Very cool</h1>
+
+<p>Nice article, it’s good to see people posting useful information</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-ff498d10-ca1f-11ec-a610-a71b942ade1f', 'respond', 'on-call-leave-it-better-than-you-found-it', 'ff498d10-ca1f-11ec-a610-a71b942ade1f')">↪&#xFE0E;
+    Reply to the homie</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+  </div>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments">
+  <input type="hidden" name="options[origin]" value="https://ernestas.me/on-call-leave-it-better-than-you-found-it">
+  <input type="hidden" name="options[parent]" value="https://ernestas.me/on-call-leave-it-better-than-you-found-it">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="on-call-leave-it-better-than-you-found-it">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ernestas.me/on-call-leave-it-better-than-you-found-it#respond" style="display:none;">&nbsp;(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII"></div>
+
+    <button class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascript/static-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
+<div class="pagination">
+  
+  <a href="/detect-terragrunt-infrastructure-drift-with-driftctl" class="left arrow">&#8592;</a>
+  
+  
+  <a href="/wfh-my-setup" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2024-05-22 06:56:49 +0000">2024</time> Ernestas Narmontas. Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+<a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+
+  </span>
+</footer>
+
+  </body>
+</html>

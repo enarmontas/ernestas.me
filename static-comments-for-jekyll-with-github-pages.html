@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+  
+
+  <title>Static Comments for Jekyll with GitHub Pages | Ernestas</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Static Comments for Jekyll with GitHub Pages" />
+<meta name="author" content="Ernestas Narmontas" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website." />
+<meta property="og:description" content="Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website." />
+<link rel="canonical" href="https://ernestas.me/static-comments-for-jekyll-with-github-pages" />
+<meta property="og:url" content="https://ernestas.me/static-comments-for-jekyll-with-github-pages" />
+<meta property="og:site_name" content="Ernestas" />
+<meta property="og:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="twitter:title" content="Static Comments for Jekyll with GitHub Pages" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ernestas Narmontas","url":"https://ernestas.me"},"dateModified":"2021-04-30T00:00:00+00:00","datePublished":"2021-04-30T00:00:00+00:00","description":"Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website.","headline":"Static Comments for Jekyll with GitHub Pages","image":"https://ernestas.me/images/site/terminal-1600-800.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ernestas.me/static-comments-for-jekyll-with-github-pages"},"url":"https://ernestas.me/static-comments-for-jekyll-with-github-pages"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://ernestas.me/feed.xml" title="Ernestas" />
+
+  <!-- Google Analytics -->
+  
+
+  <!-- Mastodon verification -->
+  
+  <link rel="me" href="https://mstdn.lt/@ernestas">
+  
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59118080-2', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+
+  <body>
+
+    
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">Ernestas</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/lt/">Lietuviškai 🇱🇹</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    
+    <span>Author</span>
+    
+    Ernestas Narmontas
+    
+    
+
+    
+    <br>
+    <time datetime="2021-04-30 00:00:00 +0000">2021-04-30</time>
+    
+  </div>
+
+  <h1 class="post-title">Static Comments for Jekyll with GitHub Pages</h1>
+  <div class="post-line"></div>
+
+  <p>Disqus is the most popular comment solution for Jekyll at the moment, but it has one huge problem. It sucks. It’s free proprietary software filled with tracking scripts that slow down your website.</p>
+
+<p>Since Jekyll sites are static there was no way to store comments without such external service or database. Well, at least until <a href="https://staticman.net/">Staticman</a>.</p>
+
+<p>Staticman is an open source static comment solution for your Jekyll site. It allows you to have user-generated content on a static website.</p>
+
+<p>I just have finished setting it up on this blog. I have used <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html">this amazing guide</a> by Travis Downs. I’m really happy how it works.
+Here’s a quick summary:</p>
+
+<ol>
+  <li>Staticman can be hosted on any platform with NodeJS. I am using free Heroku app, but there are many other options. More details <a href="https://staticman.net/docs/index.html">here</a>.</li>
+  <li>Jekyll theme will need a simple HTML form that will post comments to Staticman API. I have borrowed most of HTML/CSS/JS from the <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html">guide</a> I mentioned earlier.</li>
+  <li>Staticman will create a <a href="https://github.com/enarmontas/ernestas.me/pull/9">pull request</a> with the comment data. It can also commit directly without approval. Note: GitHub access token is required.</li>
+  <li>You’ll approve the comment and merge the pull request.</li>
+  <li>GitHub Pages (or your custom solution) will build your Jekyll site with the new commit.</li>
+  <li>Comment will appear on your website.</li>
+</ol>
+
+<p>That’s it. When you get it up and running, it works. Try it below.</p>
+
+
+</div>
+
+
+
+
+<section class="comments" id="comment-section">
+  <hr>
+  
+  <!-- Existing comments -->
+  <div class="comments__existing">
+    <h2>Comments</h2>
+    
+    
+    <!-- List main comments in reverse date order, newest first. List replies in date order, oldest first. -->
+    
+    
+
+<article id="comment-fbfcaf60-ca48-11ec-a610-a71b942ade1f" class="js-comment comment" uid="fbfcaf60-ca48-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">Wow,
+    <span class="comment__date"><a href="#comment-fbfcaf60-ca48-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 18:52</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Awesome</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-fbfcaf60-ca48-11ec-a610-a71b942ade1f', 'respond', 'static-comments-for-jekyll-with-github-pages', 'fbfcaf60-ca48-11ec-a610-a71b942ade1f')">↪&#xFE0E;
+    Reply to Wow</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-366ceca0-ca08-11ec-a610-a71b942ade1f" class="js-comment comment" uid="366ceca0-ca08-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">Dan,
+    <span class="comment__date"><a href="#comment-366ceca0-ca08-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 11:08</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Test</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-366ceca0-ca08-11ec-a610-a71b942ade1f', 'respond', 'static-comments-for-jekyll-with-github-pages', '366ceca0-ca08-11ec-a610-a71b942ade1f')">↪&#xFE0E;
+    Reply to Dan</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-92504c10-34df-11ec-ac04-c3ed3a74ecb1" class="js-comment comment" uid="92504c10-34df-11ec-ac04-c3ed3a74ecb1">
+
+  <div class="comment__author">Test,
+    <span class="comment__date"><a href="#comment-92504c10-34df-11ec-ac04-c3ed3a74ecb1" title="Permalink to this comment">2021-10-24 15:32</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Test</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-92504c10-34df-11ec-ac04-c3ed3a74ecb1', 'respond', 'static-comments-for-jekyll-with-github-pages', '92504c10-34df-11ec-ac04-c3ed3a74ecb1')">↪&#xFE0E;
+    Reply to Test</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-7dd70cf0-316b-11ec-8dac-95653ae3e9d0" class="js-comment comment" uid="7dd70cf0-316b-11ec-8dac-95653ae3e9d0">
+
+  <div class="comment__author">Dhulkarnayn,
+    <span class="comment__date"><a href="#comment-7dd70cf0-316b-11ec-8dac-95653ae3e9d0" title="Permalink to this comment">2021-10-20 06:03</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Checking</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-7dd70cf0-316b-11ec-8dac-95653ae3e9d0', 'respond', 'static-comments-for-jekyll-with-github-pages', '7dd70cf0-316b-11ec-8dac-95653ae3e9d0')">↪&#xFE0E;
+    Reply to Dhulkarnayn</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-d48d4700-f2d0-11eb-a7cf-3b5e6f08e633" class="js-comment comment" uid="d48d4700-f2d0-11eb-a7cf-3b5e6f08e633">
+
+  <div class="comment__author">Ruby,
+    <span class="comment__date"><a href="#comment-d48d4700-f2d0-11eb-a7cf-3b5e6f08e633" title="Permalink to this comment">2021-08-01 14:00</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Xin chào, test</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-d48d4700-f2d0-11eb-a7cf-3b5e6f08e633', 'respond', 'static-comments-for-jekyll-with-github-pages', 'd48d4700-f2d0-11eb-a7cf-3b5e6f08e633')">↪&#xFE0E;
+    Reply to Ruby</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-b52fb900-ce19-11eb-a2cb-018a8e4da088" class="js-comment comment" uid="b52fb900-ce19-11eb-a2cb-018a8e4da088">
+
+  <div class="comment__author">Test,
+    <span class="comment__date"><a href="#comment-b52fb900-ce19-11eb-a2cb-018a8e4da088" title="Permalink to this comment">2021-06-15 20:38</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Testing</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-b52fb900-ce19-11eb-a2cb-018a8e4da088', 'respond', 'static-comments-for-jekyll-with-github-pages', 'b52fb900-ce19-11eb-a2cb-018a8e4da088')">↪&#xFE0E;
+    Reply to Test</a>
+</div>
+</article>
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+    
+
+<article id="comment-3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0" class="js-comment comment" uid="3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0">
+
+  <div class="comment__author">Ernestas,
+    <span class="comment__date"><a href="#comment-3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0" title="Permalink to this comment">2021-04-30 21:23</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>It works, right?</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0', 'respond', 'static-comments-for-jekyll-with-github-pages', '3f5782f0-a9fa-11eb-bdd3-45cdbbd9aac0')">↪&#xFE0E;
+    Reply to Ernestas</a>
+</div>
+</article>
+
+
+<article id="comment-25f48780-a9fb-11eb-bdd3-45cdbbd9aac0" class="js-comment comment child" uid="25f48780-a9fb-11eb-bdd3-45cdbbd9aac0">
+
+  <div class="comment__author">Ernestas,
+    <span class="comment__date"><a href="#comment-25f48780-a9fb-11eb-bdd3-45cdbbd9aac0" title="Permalink to this comment">2021-04-30 21:29</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Yep, even replies are working with some HTML/JS magic.</p>
+
+  </div>
+
+  
+</article>
+
+
+
+
+<article id="comment-5a281fe0-ca56-11ec-a610-a71b942ade1f" class="js-comment comment child" uid="5a281fe0-ca56-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">Ruby,
+    <span class="comment__date"><a href="#comment-5a281fe0-ca56-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 20:27</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>It does, but how does it track a user?</p>
+
+  </div>
+
+  
+</article>
+
+
+
+
+<article id="comment-7e7b4d00-ca5a-11ec-a610-a71b942ade1f" class="js-comment comment child" uid="7e7b4d00-ca5a-11ec-a610-a71b942ade1f">
+
+  <div class="comment__author">Ernestas,
+    <span class="comment__date"><a href="#comment-7e7b4d00-ca5a-11ec-a610-a71b942ade1f" title="Permalink to this comment">2022-05-02 20:57</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Each comment has a permalink with unique ID. When you reply to the comment, the ID is saved to the <code class="language-plaintext highlighter-rouge">replying_to_uid</code> field, which is then rendered as a reply. You can see an example <a href="https://github.com/enarmontas/ernestas.me/blob/master/_data/comments/static-comments-for-jekyll-with-github-pages/entry1651525056238.yml">here</a>.</p>
+
+<p>However, it doesn’t support nested replies, that’s why I can’t reply directly to you now, but I can always use the same thread.</p>
+
+  </div>
+
+  
+</article>
+
+
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+  </div>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments">
+  <input type="hidden" name="options[origin]" value="https://ernestas.me/static-comments-for-jekyll-with-github-pages">
+  <input type="hidden" name="options[parent]" value="https://ernestas.me/static-comments-for-jekyll-with-github-pages">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="static-comments-for-jekyll-with-github-pages">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ernestas.me/static-comments-for-jekyll-with-github-pages#respond" style="display:none;">&nbsp;(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII"></div>
+
+    <button class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascript/static-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
+<div class="pagination">
+  
+  <a href="/storing-terraform-state-in-consul" class="left arrow">&#8592;</a>
+  
+  
+  <a href="/function-over-form-mounting-external-ssd-on-macbook" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2024-05-22 06:56:49 +0000">2024</time> Ernestas Narmontas. Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+<a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+
+  </span>
+</footer>
+
+  </body>
+</html>

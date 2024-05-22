@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+  
+
+  <title>Detect Terragrunt Infrastructure Drift With Driftctl | Ernestas</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Detect Terragrunt Infrastructure Drift With Driftctl" />
+<meta name="author" content="Ernestas Narmontas" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Driftctl is a tool that helps detect infrastructure drift by comparing Terraform state with live resources. It returns a list of resources not covered by infrastructure as code (IaC) codebase." />
+<meta property="og:description" content="Driftctl is a tool that helps detect infrastructure drift by comparing Terraform state with live resources. It returns a list of resources not covered by infrastructure as code (IaC) codebase." />
+<link rel="canonical" href="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl" />
+<meta property="og:url" content="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl" />
+<meta property="og:site_name" content="Ernestas" />
+<meta property="og:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://ernestas.me/images/site/terminal-1600-800.jpg" />
+<meta property="twitter:title" content="Detect Terragrunt Infrastructure Drift With Driftctl" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ernestas Narmontas","url":"https://ernestas.me"},"dateModified":"2021-11-17T00:00:00+00:00","datePublished":"2021-11-17T00:00:00+00:00","description":"Driftctl is a tool that helps detect infrastructure drift by comparing Terraform state with live resources. It returns a list of resources not covered by infrastructure as code (IaC) codebase.","headline":"Detect Terragrunt Infrastructure Drift With Driftctl","image":"https://ernestas.me/images/site/terminal-1600-800.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl"},"url":"https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://ernestas.me/feed.xml" title="Ernestas" />
+
+  <!-- Google Analytics -->
+  
+
+  <!-- Mastodon verification -->
+  
+  <link rel="me" href="https://mstdn.lt/@ernestas">
+  
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59118080-2', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+
+  <body>
+
+    
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">Ernestas</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/lt/">Lietuviškai 🇱🇹</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    
+    <span>Author</span>
+    
+    Ernestas Narmontas
+    
+    
+
+    
+    <br>
+    <time datetime="2021-11-17 00:00:00 +0000">2021-11-17</time>
+    
+  </div>
+
+  <h1 class="post-title">Detect Terragrunt Infrastructure Drift With Driftctl</h1>
+  <div class="post-line"></div>
+
+  <p><a href="https://github.com/cloudskiff/driftctl">Driftctl</a> is a tool that helps detect infrastructure
+drift by comparing Terraform state with live resources.
+It returns a list of resources not covered by infrastructure as code (IaC) codebase.</p>
+
+<p>Since <a href="https://terragrunt.gruntwork.io/">Terragrunt</a> is using standard Terraform state files,
+driftctl works with Terragrunt by using the glob pattern passed to the <code class="language-plaintext highlighter-rouge">--from</code> option.</p>
+
+<p>However, their <a href="https://driftctl.com/how-to-use-driftctl-with-terragrunt/">official guide</a>
+did not match my needs as I am using different folder structure with region names in the path,
+similar to Terragrunt
+<a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example">recommended structure</a>.</p>
+
+<p>In this article I will document my workflow to detect Terragrunt infrastructure drift using
+driftctl.</p>
+
+<h3 id="terragrunt-structure">Terragrunt Structure</h3>
+<p>My Terragrunt structure uses the following format:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>account                 &lt;- production, testing
+ └ project              &lt;- project-1, project-2
+    └ region            &lt;- global, eu-west-1
+       └ module         &lt;- s3-bucket, iam-user
+          └ resource    &lt;- example-bucket-1, example-user-1
+</code></pre></div></div>
+
+<p>It translates to something like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>production
+    project-1
+        eu-west-1
+            s3-bucket
+                example-bucket-1
+                    terragrunt.hcl
+                example-bucket-2
+                    terragrunt.hcl
+                example-bucket-3
+                    terragrunt.hcl
+        global
+            iam-assumable-role
+                example-role-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+    project-2
+        eu-west-1
+            sns-topic
+                example-sns-topic-1
+                    terragrunt.hcl
+        global
+            iam-group-with-policies
+                example-group-with-policies-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+                example-user-2
+                    terragrunt.hcl
+testing
+    project-3
+        eu-west-1
+            s3-bucket
+                example-bucket-1
+                    terragrunt.hcl
+        global
+            iam-assumable-role
+                example-role-1
+                    terragrunt.hcl
+            iam-policy
+                example-policy-1
+                    terragrunt.hcl
+            iam-user
+                example-user-1
+                    terragrunt.hcl
+</code></pre></div></div>
+
+<h3 id="pull-terragrunt-state">Pull Terragrunt State</h3>
+<p>During runtime driftctl is not running any of the Terragrunt commands,
+so I would need to pass additional parameters to driftctl for authentication to my backend.</p>
+
+<p>Since I am using <a href="/storing-terraform-state-in-consul">Consul backend</a> and my configuration is
+defined in the Terragrunt code, I will run <code class="language-plaintext highlighter-rouge">terragrunt state pull</code> on each of my modules.
+It will automatically generate Terraform backend config and pull the state to a local folder.
+Then, I will pass my local state files using glob pattern to <code class="language-plaintext highlighter-rouge">driftctl scan</code> command.</p>
+
+<p>Here is the process.</p>
+
+<p>Go to the target AWS account in your Terragrunt repository:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd &lt;terragrunt&gt;/&lt;account&gt;
+</code></pre></div></div>
+
+<p>Find all account modules by searching for <code class="language-plaintext highlighter-rouge">terragrunt.hcl</code> file:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MODULES=$(find . -name "terragrunt.hcl" -exec dirname {} \; | grep -v ".terragrunt-cache" | sed 's/\.\///g' | grep '/')
+</code></pre></div></div>
+
+<p>Pull the Terraform state for each Terragrunt module to a separate <code class="language-plaintext highlighter-rouge">states</code> folder,
+while maintaining the same module structure:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $MODULES | \
+  while read module; do \
+    echo "Pulling state for $module"; \
+    mkdir -p states/$module; \
+    terragrunt state pull --terragrunt-working-dir $module &gt; states/$module/tg.tfstate; \
+  done
+</code></pre></div></div>
+
+<p>Check if the state files were actually saved:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls states/**/tg.tfstate
+</code></pre></div></div>
+<p>It should return a similar list:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>states/project-1/eu-west-1/s3-bucket/example-bucket-1/tg.tfstate
+states/project-1/eu-west-1/s3-bucket/example-bucket-2/tg.tfstate
+states/project-1/eu-west-1/s3-bucket/example-bucket-3/tg.tfstate
+...
+</code></pre></div></div>
+
+<p>Now that we have our Terragrunt state files locally,
+we can go to the next step and actually detect the infrastructure drift.</p>
+
+<h3 id="detect-infrastructure-drift">Detect Infrastructure Drift</h3>
+<p>Driftctl scans all live resources in the same account that AWS is authenticated to.</p>
+
+<p>If the AWS CLI region is set to <code class="language-plaintext highlighter-rouge">eu-west-2</code>, but the state files have resources from <code class="language-plaintext highlighter-rouge">eu-west-1</code>
+region, it will show that resources are found in the state, but not in the AWS account.
+Also, driftctl will always scan global resources like IAM users or Route53 zones.</p>
+
+<p>In order to match my current AWS region and global resources,
+I always use two <code class="language-plaintext highlighter-rouge">tfstate://</code> glob patterns:
+one for the current region and one for global resources.</p>
+
+<p>Here is my resulting driftctl command.
+Let’s run it to detect the infrastructure drift in the <code class="language-plaintext highlighter-rouge">eu-west-1</code> region.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export AWS_REGION=eu-west-1
+driftctl scan --from tfstate://states/**/$AWS_REGION/**/tg.tfstate,tfstate://states/**/global/**/tg.tfstate
+</code></pre></div></div>
+
+<p>Here are the scan results:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Found resources not covered by IaC:
+  aws_api_gateway_account:
+    - api-gateway-account
+  aws_iam_access_key:
+    - AKIA123456789EXAMPLE
+        User: example-user-2
+  aws_iam_role:
+    - OrganizationAccountAccessRole
+  aws_iam_role_policy:
+    - OrganizationAccountAccessRole:AdministratorAccess
+  aws_network_acl_rule:
+    - nacl-1234567891
+        CIDR: 0.0.0.0/0, Egress: true, Network: acl-1aa2b333, Protocol: All, Rule number: 100
+    - nacl-1234567892
+        CIDR: 0.0.0.0/0, Egress: false, Network: acl-1aa2b444, Protocol: All, Rule number: 100
+Found changed resources:
+  From tfstate://states/project-1/global/iam-assumable-role/example-role-1/tg.tfstate
+    - example-role-1 (aws_iam_role.this):
+        - name_prefix: "" =&gt; &lt;nil&gt;
+        - permissions_boundary: "" =&gt; &lt;nil&gt;
+  From tfstate://states/project-2/global/iam-policy/example-policy-1/tg.tfstate
+    - example-policy-1 (aws_iam_policy.this):
+        - name_prefix: "" =&gt; &lt;nil&gt;
+Found 60 resource(s)
+ - 90% coverage
+ - 54 resource(s) managed by terraform
+     - 2/54 resource(s) out of sync with Terraform state
+ - 6 resource(s) not managed by Terraform
+ - 0 resource(s) found in a Terraform state but missing on the cloud provider
+</code></pre></div></div>
+
+<p>It gives a great overview of how my live cloud resources match the Terragrunt state.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>Driftctl is an amazing tool that helps detect infrastructure drift.
+It can work with Terragrunt even with custom workflows and structure.
+I will use this tool for catching all unmanaged resources across all of my cloud accounts.</p>
+
+
+</div>
+
+
+
+
+<section class="comments" id="comment-section">
+  <hr>
+  
+  <!-- Existing comments -->
+  <div class="comments__existing">
+    <h2>Comments</h2>
+    
+    
+    <!-- List main comments in reverse date order, newest first. List replies in date order, oldest first. -->
+    
+    
+
+<article id="comment-8b3596b0-4902-11ec-ad18-db9a9ded87b0" class="js-comment comment" uid="8b3596b0-4902-11ec-ad18-db9a9ded87b0">
+
+  <div class="comment__author">Moan,
+    <span class="comment__date"><a href="#comment-8b3596b0-4902-11ec-ad18-db9a9ded87b0" title="Permalink to this comment">2021-11-19 06:33</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>Great article!</p>
+
+<p>Can you share your configuration files? Would be nice to see a complete example</p>
+
+  </div>
+
+  
+<div class="comment__meta">
+  <a rel="nofollow" class="comment__reply-link"
+    onclick="return addComment.moveForm('comment-8b3596b0-4902-11ec-ad18-db9a9ded87b0', 'respond', 'detect-terragrunt-infrastructure-drift-with-driftctl', '8b3596b0-4902-11ec-ad18-db9a9ded87b0')">↪&#xFE0E;
+    Reply to Moan</a>
+</div>
+</article>
+
+
+<article id="comment-75b98080-4952-11ec-9249-b3591a899e84" class="js-comment comment child" uid="75b98080-4952-11ec-9249-b3591a899e84">
+
+  <div class="comment__author">Ernestas,
+    <span class="comment__date"><a href="#comment-75b98080-4952-11ec-9249-b3591a899e84" title="Permalink to this comment">2021-11-19 16:05</a></span>
+  </div>
+
+  <div class="comment__body">
+    <p>No, most of my config includes private stuff, which I can’t publish. 
+However, it’s almost exactly the same as <a href="https://github.com/gruntwork-io/terragrunt-infrastructure-live-example">this one</a>, 
+except I use Consul as my backend.</p>
+
+  </div>
+
+  
+</article>
+
+
+
+
+<hr style="border-top: 1px solid #ccc; background: transparent; margin-bottom: 10px;">
+
+
+    
+  </div>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://ernestas-me-staticman.herokuapp.com/v2/entry/enarmontas/ernestas.me/master/comments">
+  <input type="hidden" name="options[origin]" value="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl">
+  <input type="hidden" name="options[parent]" value="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="detect-terragrunt-infrastructure-drift-with-driftctl">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="scqYdckWe41ee8flMwhE2Uaeyf88VsD2p/Z/qjG4LPkw5WI3U+o2pZ6ga9Lg1Q+E3QYW0ZRSZy0shOc9Z0kPkMRtTvD4pMoUZxEDtKth6MpMTMpivlvvKA6YW5vdkaf3GFR2/iX2yXEksMET5UzpkDYm41O3GU9NH61kaiWGZjHMI20WViXj2Xyb9nqvYRabwLusoLBF+K01eWQB5dXsVYMNH4wV7VWvMhlwS1pjRbNgK349AQ6xzBtKag6PYrvZvVn7LVEgTtcXxPrOgaihpsTMHLtPhfE77ucbg9+MNNIVmBs7TzkdjsW0iLqbzG1nIVpq23y8Q/iU7AbEufQJ1E2SZb7fH5DOKQ6eg6O/ZmFzUURVNAMXh5kCOQJeG0oO7us7b/w7sYFgkkvT5d6x/aYUZ4lhRuntBpo8BHjMrwYgiD8wOlbZW8xoT99BfVdspiu+24KHuFDNv4MqQbDotckF+T9R/mIXkiO6rdE6yrBofoBB3use7l4l1FQ+XJUxmQ0Zr5YVCrhy0QbBxggfeBMo1UxSFsOkmjnRw+4E8mZjWEezIlY85eP4XFn31q7w9nomg8kU+xpYeTnpcTQDcbiRkg/AK8UU3zP33Jh/WvQzUAwRlutQfJs6lXEdgY26MTX56TXej/unDekDlwsHZVMHCK0OjTelAsyHsk0Vqeo=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ernestas.me/detect-terragrunt-infrastructure-drift-with-driftctl#respond" style="display:none;">&nbsp;(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LfbfUsaAAAAAGjuUw-KsmEs2JKV8t3KlTQ5LyII"></div>
+
+    <button class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascript/static-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+
+<div class="pagination">
+  
+  <a href="/lenovo-thinkpad-p1-gen3" class="left arrow">&#8592;</a>
+  
+  
+  <a href="/on-call-leave-it-better-than-you-found-it" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2024-05-22 06:56:49 +0000">2024</time> Ernestas Narmontas. Made with <a href="https://jekyllrb.com/">Jekyll</a> and
+<a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+
+  </span>
+</footer>
+
+  </body>
+</html>
